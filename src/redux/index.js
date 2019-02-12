@@ -4,9 +4,14 @@ import configureStore from './CreateStore'
 import rootSaga from '../sagas/'
 import ReduxPersist from '../config/ReduxPersist'
 import { loadingBarReducer } from 'react-redux-loading-bar'
+import { createBrowserHistory } from 'history'
+import { connectRouter, routerMiddleware } from 'connected-react-router'
+
+export const history = createBrowserHistory()
 
 /* ------------- Assemble The Reducers ------------- */
 export const reducers = combineReducers({
+  router: connectRouter(history),
   startup: require('./StartupRedux').reducer,
   auth: require('./AuthRedux').reducer,
   user: require('./UserRedux').reducer,
@@ -22,7 +27,7 @@ export default () => {
     finalReducers = persistReducer(persistConfig, reducers)
   }
 
-  let { store, sagasManager, sagaMiddleware } = configureStore(finalReducers, rootSaga)
+  let { store, sagasManager, sagaMiddleware } = configureStore(finalReducers, rootSaga, routerMiddleware(history))
 
   if (module.hot) {
     module.hot.accept(() => {

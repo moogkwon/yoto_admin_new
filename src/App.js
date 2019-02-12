@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 // import { renderRoutes } from 'react-router-config';
-import createStore from './redux'
+import createStore, { history } from './redux'
 import { Provider } from 'react-redux'
+import { ConnectedRouter } from 'connected-react-router'
 import Loadable from 'react-loadable';
 import './App.scss';
 
@@ -40,15 +41,17 @@ class App extends Component {
   render () {
     return (
       <Provider store={createStore()}>
-        <HashRouter>
-          <Switch>
-            <Route exact path="/login" name="Login Page" component={Login} />
-            <Route exact path="/register" name="Register Page" component={Register} />
-            <Route exact path="/404" name="Page 404" component={Page404} />
-            <Route exact path="/500" name="Page 500" component={Page500} />
-            <Route path="/" name="Home" component={DefaultLayout} />
-          </Switch>
-        </HashRouter>
+        <ConnectedRouter history={history}>
+          <HashRouter>
+            <Switch>
+              <Route exact path="/login" name="Login Page" component={Login} />
+              <Route exact path="/register" name="Register Page" component={Register} />
+              <Route exact path="/404" name="Page 404" component={Page404} />
+              <Route exact path="/500" name="Page 500" component={Page500} />
+              <Route path="/" name="Home" component={DefaultLayout} />
+            </Switch>
+          </HashRouter>
+        </ConnectedRouter>
       </Provider>
     );
   }
