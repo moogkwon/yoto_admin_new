@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import { Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap'
 
-import usersData from './UsersData'
-
 class User extends Component {
   render () {
-    const user = usersData.find(user => user.id.toString() === this.props.match.params.id)
+    const user = this.props.user
 
     const userDetails = user ? Object.entries(user) : [['id', (<span><i className='text-muted icon-ban' /> Not found</span>)]]
 

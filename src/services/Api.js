@@ -62,10 +62,13 @@ const create = (baseURL = AppConfig.apiURL) => {
   const login = (data) => api.post('/auth/login', data)
   const refreshToken = (refreshToken) => api.post('/auth/refresh', { refresh_token: refreshToken })
 
-  const getUsers = (query) => api.get('/users', query)
+  const getUsers = (query) => api.get('/users', { query })
   const getUser = (id) => api.get(`/users/${id}`)
   const deleteUser = (id) => api.delete(`/users/${id}`)
   const updateUser = (id) => api.put(`/users/${id}`)
+  const rejectProfile = (id) => api.put(`/users/${id}/reject`)
+  const blockUser = (id) => api.put(`/users/${id}/block`)
+  const unblockUser = (id) => api.put(`/users/${id}/unblock`)
 
   // ------
   // STEP 3
@@ -89,7 +92,10 @@ const create = (baseURL = AppConfig.apiURL) => {
     getUsers,
     getUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    rejectProfile,
+    blockUser,
+    unblockUser
   }
 }
 

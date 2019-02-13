@@ -21,8 +21,20 @@ const { Types, Creators } = createActions({
   updateUserFailure: ['message'],
 
   deleteUser: ['userId'],
-  deleteUserSuccess: ['user'],
+  deleteUserSuccess: [],
   deleteUserFailure: ['message'],
+
+  rejectProfile: ['userId'],
+  rejectProfileSuccess: ['user'],
+  rejectProfileFailure: ['message'],
+
+  blockUser: ['userId'],
+  blockUserSuccess: ['user'],
+  blockUserFailure: ['message'],
+
+  unblockUser: ['userId'],
+  unblockUserSuccess: ['user'],
+  unblockUserFailure: ['message'],
 
   setUser: ['user']
 })
@@ -35,6 +47,9 @@ export default Creators
 export const INITIAL_STATE = Immutable({
   user: null,
   users: [],
+  query: {
+    where: { is_admin: { $ne: true } }
+  },
   fetching: null,
   isSuccess: null,
   message: null
@@ -63,6 +78,18 @@ export const deleteUser = state => state.merge({ fetching: true })
 export const deleteUserSuccess = (state) => state.merge({ fetching: false, isSuccess: true, user: null })
 export const deleteUserFailure = (state, { message }) => state.merge({ fetching: false, isSuccess: false, message })
 
+export const rejectProfile = state => state.merge({ fetching: true })
+export const rejectProfileSuccess = (state) => state.merge({ fetching: false, isSuccess: true, user: null })
+export const rejectProfileFailure = (state, { message }) => state.merge({ fetching: false, isSuccess: false, message })
+
+export const blockUser = state => state.merge({ fetching: true })
+export const blockUserSuccess = (state) => state.merge({ fetching: false, isSuccess: true, user: null })
+export const blockUserFailure = (state, { message }) => state.merge({ fetching: false, isSuccess: false, message })
+
+export const unblockUser = state => state.merge({ fetching: true })
+export const unblockUserSuccess = (state) => state.merge({ fetching: false, isSuccess: true, user: null })
+export const unblockUserFailure = (state, { message }) => state.merge({ fetching: false, isSuccess: false, message })
+
 export const setUser = (state, { user }) => state.merge({ user })
 
 /* ------------- Hookup Reducers To Types ------------- */
@@ -87,6 +114,18 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.DELETE_USER]: deleteUser,
   [Types.DELETE_USER_SUCCESS]: deleteUserSuccess,
   [Types.DELETE_USER_FAILURE]: deleteUserFailure,
+
+  [Types.REJECT_PROFILE]: rejectProfile,
+  [Types.REJECT_PROFILE_SUCCESS]: rejectProfileSuccess,
+  [Types.REJECT_PROFILE_FAILURE]: rejectProfileFailure,
+
+  [Types.BLOCK_USER]: blockUser,
+  [Types.BLOCK_USER_SUCCESS]: blockUserSuccess,
+  [Types.BLOCK_USER_FAILURE]: blockUserFailure,
+
+  [Types.UNBLOCK_USER]: unblockUser,
+  [Types.UNBLOCK_USER_SUCCESS]: unblockUserSuccess,
+  [Types.UNBLOCK_USER_FAILURE]: unblockUserFailure,
 
   [Types.SET_USER]: setUser
 })

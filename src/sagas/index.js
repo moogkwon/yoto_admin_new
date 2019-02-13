@@ -13,7 +13,7 @@ import { UserTypes } from '../redux/UserRedux'
 
 import { startup } from './StartupSagas'
 import { login } from './AuthSagas'
-import { getUsers, getUser, createUser, updateUser, deleteUser } from './UserSagas'
+import { getUsers, getUser, createUser, updateUser, deleteUser, rejectProfile, blockUser, unblockUser } from './UserSagas'
 
 /* ------------- API ------------- */
 
@@ -36,6 +36,9 @@ export default function * root () {
     takeLatest(UserTypes.GET_USER, getUser, api),
     takeLatest(UserTypes.CREATE_USER, createUser, api),
     takeLatest(UserTypes.UPDATE_USER, updateUser, api),
-    takeLatest(UserTypes.DELETE_USER, deleteUser, api)
+    takeLatest(UserTypes.DELETE_USER, deleteUser, api),
+    takeLatest(UserTypes.REJECT_PROFILE, rejectProfile, api),
+    takeLatest(UserTypes.BLOCK_USER, blockUser, api),
+    takeLatest(UserTypes.UNBLOCK_USER, unblockUser, api)
   ])
 }

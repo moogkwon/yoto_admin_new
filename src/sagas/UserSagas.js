@@ -10,15 +10,15 @@
 *    you'll need to define a constant in that file.
 *************************************************************/
 
-import { call, put } from 'redux-saga/effects'
+import { call, put, select } from 'redux-saga/effects'
 import UserActions from '../redux/UserRedux'
 import { getMessageError, showError } from '../utilities/utils'
 import { showLoading, resetLoading } from 'react-redux-loading-bar'
 import { goBack } from 'connected-react-router'
 
 export function * getUsers (api) {
+  const query = yield select(state => state.user.query)
   // make the call to the api
-  const query = {}
   yield put(showLoading())
   const response = yield call(api.getUsers, query)
   yield put(resetLoading())
@@ -91,11 +91,56 @@ export function * deleteUser (api, { userId }) {
   // success?
   if (response.ok) {
     // dispatch successful deleteUsers
-    yield put(goBack())
     yield put(UserActions.deleteUserSuccess(response.data.data))
+    yield call(getUsers, api)
   } else {
     // dispatch failure
     yield put(UserActions.deleteUserFailure(getMessageError(response)))
+    showError(getMessageError(response))
+  }
+}
+
+export function * rejectProfile (api, { userId }) {
+  // make the call to the api
+  const response = yield call(api.rejectProfile, userId)
+  // success?
+  if (response.ok) {
+    // dispatch successful rejectProfile
+    yield put(UserActions.rejectProfileSuccess(response.data.data))
+    yield call(getUsers, api)
+  } else {
+    // dispatch failure
+    yield put(UserActions.rejectProfileFailure(getMessageError(response)))
+    showError(getMessageError(response))
+  }
+}
+
+export function * blockUser (api, { userId }) {
+  // make the call to the api
+  const response = yield call(api.blockUser, userId)
+  // success?
+  if (response.ok) {
+    // dispatch successful blockUsers
+    yield put(UserActions.blockUserSuccess(response.data.data))
+    yield call(getUsers, api)
+  } else {
+    // dispatch failure
+    yield put(UserActions.blockUserFailure(getMessageError(response)))
+    showError(getMessageError(response))
+  }
+}
+
+export function * unblockUser (api, { userId }) {
+  // make the call to the api
+  const response = yield call(api.unblockUser, userId)
+  // success?
+  if (response.ok) {
+    // dispatch successful unblockUsers
+    yield put(UserActions.unblockUserSuccess(response.data.data))
+    yield call(getUsers, api)
+  } else {
+    // dispatch failure
+    yield put(UserActions.unblockUserFailure(getMessageError(response)))
     showError(getMessageError(response))
   }
 }
