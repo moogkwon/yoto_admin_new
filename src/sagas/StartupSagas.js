@@ -1,7 +1,7 @@
 import { put, select, call } from 'redux-saga/effects'
 // import { is } from 'ramda'
 import AuthActions from '../redux/AuthRedux'
-import { showLoading, hideLoading } from 'react-redux-loading-bar'
+import { showLoading, resetLoading } from 'react-redux-loading-bar'
 import { getMessageError, showError } from '../utilities/utils'
 import { replace } from 'connected-react-router'
 import StartupActions from '../redux/StartupRedux'
@@ -15,7 +15,7 @@ export function * startup (api, action) {
   if (auth.refreshToken) {
     yield put(showLoading())
     const response = yield call(api.refreshToken, auth.refreshToken)
-    yield put(hideLoading())
+    yield put(resetLoading())
     if (response.ok) {
       const data = response.data
       // dispatch successful logins

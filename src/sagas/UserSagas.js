@@ -13,7 +13,7 @@
 import { call, put } from 'redux-saga/effects'
 import UserActions from '../redux/UserRedux'
 import { getMessageError, showError } from '../utilities/utils'
-import { showLoading, hideLoading } from 'react-redux-loading-bar'
+import { showLoading, resetLoading } from 'react-redux-loading-bar'
 import { goBack } from 'connected-react-router'
 
 export function * getUsers (api) {
@@ -21,7 +21,7 @@ export function * getUsers (api) {
   const query = {}
   yield put(showLoading())
   const response = yield call(api.getUsers, query)
-  yield put(hideLoading())
+  yield put(resetLoading())
   // success?
   if (response.ok) {
     // dispatch successful getUserss
@@ -38,7 +38,7 @@ export function * getUser (api, { userId }) {
   const query = {}
   yield put(showLoading())
   const response = yield call(api.getUser, userId, query)
-  yield put(hideLoading())
+  yield put(resetLoading())
   // success?
   if (response.ok) {
     // dispatch successful getUsers
@@ -54,7 +54,7 @@ export function * createUser (api, { user }) {
   // make the call to the api
   yield put(showLoading())
   const response = yield call(api.createUser, user)
-  yield put(hideLoading())
+  yield put(resetLoading())
   // success?
   if (response.ok) {
     // yield call(getUsers, api)
@@ -72,7 +72,7 @@ export function * updateUser (api, { user }) {
   // make the call to the api
   yield put(showLoading())
   const response = yield call(api.updateUser, user)
-  yield put(hideLoading())
+  yield put(resetLoading())
   // success?
   if (response.ok) {
     yield put(goBack())

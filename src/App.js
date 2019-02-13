@@ -43,7 +43,7 @@ class App extends Component {
   render () {
     return (
       <Provider store={createStore()}>
-        <LoadingBar style={{ height: '5px', top: 0 }} />
+        <LoadingBar style={{ zIndex: 9999, backgroundColor: '#f86c6b', top: 0 }} />
         <ToastContainer />
         <ConnectedRouter history={history}>
           <Switch>
