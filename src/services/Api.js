@@ -61,8 +61,11 @@ const create = (baseURL = AppConfig.apiURL) => {
   // auth
   const login = (data) => api.post('/auth/login', data)
   const refreshToken = (refreshToken) => api.post('/auth/refresh', { refresh_token: refreshToken })
-  // patient
-  // const getPatients = (query, pageIndex, pageSize, search) => api.get(`/patients`, { query, pageIndex, pageSize, search })
+
+  const getUsers = (query) => api.get('/users', query)
+  const getUser = (id) => api.get(`/users/${id}`)
+  const deleteUser = (id) => api.delete(`/users/${id}`)
+  const updateUser = (id) => api.put(`/users/${id}`)
 
   // ------
   // STEP 3
@@ -81,9 +84,12 @@ const create = (baseURL = AppConfig.apiURL) => {
     setToken,
     // auth
     login,
-    refreshToken
-    // patient
-    // getPatients,
+    refreshToken,
+    // user
+    getUsers,
+    getUser,
+    updateUser,
+    deleteUser
   }
 }
 

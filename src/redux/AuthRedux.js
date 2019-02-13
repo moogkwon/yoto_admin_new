@@ -29,7 +29,7 @@ export const INITIAL_STATE = Immutable({
 // request the data from an api
 export const login = state => state.merge({ fetching: true, user: null })
 export const loginSuccess = (state, { data }) => state.merge({ fetching: false, isSuccess: true, ...data })
-export const loginFailure = (state, { message }) => state.merge({ fetching: false, isSuccess: false, user: null, token: null, message })
+export const loginFailure = (state, { message }) => INITIAL_STATE
 
 export const setUser = (state, { user }) => state.merge({ user })
 export const logout = (state) => INITIAL_STATE

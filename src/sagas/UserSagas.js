@@ -12,14 +12,18 @@
 
 import { call, put, select } from 'redux-saga/effects'
 import UserActions from '../redux/UserRedux'
-import { getMessageError } from '../utilities/utils'
+import { getMessageError, showError } from '../utilities/utils'
+import { showLoading, hideLoading } from 'react-redux-loading-bar'
+import { goBack } from 'connected-react-router'
 
 export function * getUsers (api) {
-  const { token } = yield select(state => state.auth.user)
+  const token = yield select(state => state.auth.token)
   api.setToken(token)
   // make the call to the api
   const query = {}
+  yield put(showLoading())
   const response = yield call(api.getUsers, query)
+  yield put(hideLoading())
   // success?
   if (response.ok) {
     // dispatch successful getUserss
@@ -27,15 +31,18 @@ export function * getUsers (api) {
   } else {
     // dispatch failure
     yield put(UserActions.getUsersFailure(getMessageError(response)))
+    showError(getMessageError(response))
   }
 }
 
-export function * getUser (api, { patientId }) {
-  const { token } = yield select(state => state.auth.user)
+export function * getUser (api, { userId }) {
+  const token = yield select(state => state.auth.token)
   api.setToken(token)
   // make the call to the api
   const query = {}
-  const response = yield call(api.getUser, patientId, query)
+  yield put(showLoading())
+  const response = yield call(api.getUser, userId, query)
+  yield put(hideLoading())
   // success?
   if (response.ok) {
     // dispatch successful getUsers
@@ -43,50 +50,62 @@ export function * getUser (api, { patientId }) {
   } else {
     // dispatch failure
     yield put(UserActions.getUserFailure(getMessageError(response)))
+    showError(getMessageError(response))
   }
 }
 
-export function * createUser (api, { patient }) {
-  const { token } = yield select(state => state.auth.user)
+export function * createUser (api, { user }) {
+  const token = yield select(state => state.auth.token)
   api.setToken(token)
   // make the call to the api
-  const response = yield call(api.createUser, patient)
+  yield put(showLoading())
+  const response = yield call(api.createUser, user)
+  yield put(hideLoading())
   // success?
   if (response.ok) {
+    // yield call(getUsers, api)
+    yield put(goBack())
     // dispatch successful createUsers
     yield put(UserActions.createUserSuccess(response.data.data))
   } else {
     // dispatch failure
     yield put(UserActions.createUserFailure(getMessageError(response)))
+    showError(getMessageError(response))
   }
 }
 
-export function * updateUser (api, { patient }) {
-  const { token } = yield select(state => state.auth.user)
+export function * updateUser (api, { user }) {
+  const token = yield select(state => state.auth.token)
   api.setToken(token)
   // make the call to the api
-  const response = yield call(api.updateUser, patient)
+  yield put(showLoading())
+  const response = yield call(api.updateUser, user)
+  yield put(hideLoading())
   // success?
   if (response.ok) {
+    yield put(goBack())
     // dispatch successful updateUsers
     yield put(UserActions.updateUserSuccess(response.data.data))
   } else {
     // dispatch failure
     yield put(UserActions.updateUserFailure(getMessageError(response)))
+    showError(getMessageError(response))
   }
 }
 
-export function * deleteUser (api, { patientId }) {
-  const { token } = yield select(state => state.auth.user)
+export function * deleteUser (api, { userId }) {
+  const token = yield select(state => state.auth.token)
   api.setToken(token)
   // make the call to the api
-  const response = yield call(api.deleteUser, patientId)
+  const response = yield call(api.deleteUser, userId)
   // success?
   if (response.ok) {
     // dispatch successful deleteUsers
+    yield put(goBack())
     yield put(UserActions.deleteUserSuccess(response.data.data))
   } else {
     // dispatch failure
     yield put(UserActions.deleteUserFailure(getMessageError(response)))
+    showError(getMessageError(response))
   }
 }

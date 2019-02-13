@@ -26,10 +26,11 @@ export function * login (api, { data }) {
     const data = response.data.data
     // dispatch successful logins
     yield put(AuthActions.loginSuccess(data))
+    yield call(api.setToken, data.token)
     yield put(push('/dashboard'))
   } else {
     // dispatch failure
-    yield put(AuthActions.loginFailure(getMessageError(response)))
+    yield put(AuthActions.loginFailure())
     showError(getMessageError(response))
   }
 }

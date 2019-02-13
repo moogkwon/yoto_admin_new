@@ -3,6 +3,7 @@ import { put, select, call } from 'redux-saga/effects'
 import AuthActions from '../redux/AuthRedux'
 import { showLoading, hideLoading } from 'react-redux-loading-bar'
 import { getMessageError, showError } from '../utilities/utils'
+import { replace } from 'connected-react-router'
 
 // exported to make available for tests
 // export const selectAvatar = (state) => state.github.avatar
@@ -18,9 +19,12 @@ export function * startup (api, action) {
       const data = response.data
       // dispatch successful logins
       yield put(AuthActions.loginSuccess(data))
+      yield call(api.setToken, data.token)
     } else {
       yield put(AuthActions.loginFailure())
       showError(getMessageError(response))
     }
+  } else {
+    yield put(replace('/login'))
   }
 }
