@@ -4,7 +4,7 @@ import Immutable from 'seamless-immutable'
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
-  login: ['username', 'password'],
+  login: ['data'],
   loginSuccess: ['data'],
   loginFailure: ['message'],
 

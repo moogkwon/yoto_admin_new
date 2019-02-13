@@ -14,17 +14,19 @@ import { call, put } from 'redux-saga/effects'
 import AuthActions from '../redux/AuthRedux'
 import { getMessageError, showError } from '../utilities/utils'
 import { showLoading, hideLoading } from 'react-redux-loading-bar'
+import { push } from 'connected-react-router'
 
-export function * login (api, { email, password }) {
+export function * login (api, { data }) {
   yield put(showLoading())
   // make the call to the api
-  const response = yield call(api.login, email, password)
+  const response = yield call(api.login, data)
   yield put(hideLoading())
   // success?
   if (response.ok) {
     const data = response.data.data
     // dispatch successful logins
     yield put(AuthActions.loginSuccess(data))
+    yield put(push('/dashboard'))
   } else {
     // dispatch failure
     yield put(AuthActions.loginFailure(getMessageError(response)))

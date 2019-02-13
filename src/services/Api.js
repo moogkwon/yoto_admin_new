@@ -59,7 +59,7 @@ const create = (baseURL = AppConfig.apiURL) => {
   // Since we can't hide from that, we embrace it by getting out of the
   // way at this level.
   // auth
-  const login = (uid, password) => api.post('/auth/login', { uid, password })
+  const login = (data) => api.post('/auth/login', data)
   const refreshToken = (refreshToken) => api.post('/auth/refresh', { refresh_token: refreshToken })
   // patient
   // const getPatients = (query, pageIndex, pageSize, search) => api.get(`/patients`, { query, pageIndex, pageSize, search })
