@@ -4,6 +4,7 @@ import AuthActions from '../redux/AuthRedux'
 import { showLoading, hideLoading } from 'react-redux-loading-bar'
 import { getMessageError, showError } from '../utilities/utils'
 import { replace } from 'connected-react-router'
+import StartupActions from '../redux/StartupRedux'
 
 // exported to make available for tests
 // export const selectAvatar = (state) => state.github.avatar
@@ -27,4 +28,5 @@ export function * startup (api, action) {
   } else {
     yield put(replace('/login'))
   }
+  yield put(StartupActions.startupComplete())
 }

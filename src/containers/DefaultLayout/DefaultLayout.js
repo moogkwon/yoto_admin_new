@@ -19,6 +19,7 @@ import {
 import navigation from '../../_nav';
 // routes config
 import routes from '../../routes';
+import Loading from '../../views/Loading';
 
 const DefaultAside = React.lazy(() => import('./DefaultAside'));
 const DefaultFooter = React.lazy(() => import('./DefaultFooter'));
@@ -26,18 +27,18 @@ const DefaultHeader = React.lazy(() => import('./DefaultHeader'));
 
 class DefaultLayout extends Component {
 
-  loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>
-
   signOut(e) {
     e.preventDefault()
     this.props.history.push('/login')
   }
 
   render() {
+    if (this.props.isStarting) return <Loading />
     return (
       <div className="app">
+        {!this.props.auth.user && <Redirect from="*" to="/login" />}
         <AppHeader fixed>
-          <Suspense  fallback={this.loading()}>
+          <Suspense  fallback={<Loading />}>
             <DefaultHeader onLogout={e=>this.signOut(e)}/>
           </Suspense>
         </AppHeader>
@@ -54,9 +55,8 @@ class DefaultLayout extends Component {
           <main className="main">
             <AppBreadcrumb appRoutes={routes}/>
             <Container fluid>
-              <Suspense fallback={this.loading()}>
+              <Suspense fallback={<Loading />}>
                 <Switch>
-                  {!this.props.auth.user && <Redirect from="*" to="/login" />}
                   {routes.map((route, idx) => {
                     return route.component ? (
                       <Route
@@ -75,13 +75,13 @@ class DefaultLayout extends Component {
             </Container>
           </main>
           <AppAside fixed>
-            <Suspense fallback={this.loading()}>
+            <Suspense fallback={<Loading />}>
               <DefaultAside />
             </Suspense>
           </AppAside>
         </div>
         <AppFooter>
-          <Suspense fallback={this.loading()}>
+          <Suspense fallback={<Loading />}>
             <DefaultFooter />
           </Suspense>
         </AppFooter>

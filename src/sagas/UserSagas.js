@@ -10,15 +10,13 @@
 *    you'll need to define a constant in that file.
 *************************************************************/
 
-import { call, put, select } from 'redux-saga/effects'
+import { call, put } from 'redux-saga/effects'
 import UserActions from '../redux/UserRedux'
 import { getMessageError, showError } from '../utilities/utils'
 import { showLoading, hideLoading } from 'react-redux-loading-bar'
 import { goBack } from 'connected-react-router'
 
 export function * getUsers (api) {
-  const token = yield select(state => state.auth.token)
-  api.setToken(token)
   // make the call to the api
   const query = {}
   yield put(showLoading())
@@ -36,8 +34,6 @@ export function * getUsers (api) {
 }
 
 export function * getUser (api, { userId }) {
-  const token = yield select(state => state.auth.token)
-  api.setToken(token)
   // make the call to the api
   const query = {}
   yield put(showLoading())
@@ -55,8 +51,6 @@ export function * getUser (api, { userId }) {
 }
 
 export function * createUser (api, { user }) {
-  const token = yield select(state => state.auth.token)
-  api.setToken(token)
   // make the call to the api
   yield put(showLoading())
   const response = yield call(api.createUser, user)
@@ -75,8 +69,6 @@ export function * createUser (api, { user }) {
 }
 
 export function * updateUser (api, { user }) {
-  const token = yield select(state => state.auth.token)
-  api.setToken(token)
   // make the call to the api
   yield put(showLoading())
   const response = yield call(api.updateUser, user)
@@ -94,8 +86,6 @@ export function * updateUser (api, { user }) {
 }
 
 export function * deleteUser (api, { userId }) {
-  const token = yield select(state => state.auth.token)
-  api.setToken(token)
   // make the call to the api
   const response = yield call(api.deleteUser, userId)
   // success?

@@ -59,7 +59,7 @@ class Users extends Component {
           <Col>
             <Card>
               <CardHeader>
-                <div class='d-flex justify-content-between'>
+                <div className='d-flex justify-content-between'>
                   <div>
                     <i className='fa fa-align-justify' /> Users
                   </div>

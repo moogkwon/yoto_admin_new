@@ -9,8 +9,7 @@ import { ToastContainer } from 'react-toastify'
 import './App.scss';
 import 'react-toastify/dist/ReactToastify.css'
 import LoadingBar from 'react-redux-loading-bar'
-
-const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
+import loading from './views/Loading'
 
 // Containers
 const DefaultLayout = Loadable({
@@ -44,7 +43,7 @@ class App extends Component {
   render () {
     return (
       <Provider store={createStore()}>
-        <LoadingBar showFastActions />
+        <LoadingBar style={{ height: '5px', top: 0 }} />
         <ToastContainer />
         <ConnectedRouter history={history}>
           <Switch>
