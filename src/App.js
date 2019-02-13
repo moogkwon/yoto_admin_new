@@ -5,7 +5,10 @@ import createStore, { history } from './redux'
 import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'connected-react-router'
 import Loadable from 'react-loadable';
+import { ToastContainer } from 'react-toastify'
 import './App.scss';
+import 'react-toastify/dist/ReactToastify.css'
+import LoadingBar from 'react-redux-loading-bar'
 
 const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
 
@@ -41,6 +44,8 @@ class App extends Component {
   render () {
     return (
       <Provider store={createStore()}>
+        <LoadingBar style={{ top: 0 }} />
+        <ToastContainer />
         <ConnectedRouter history={history}>
           <HashRouter>
             <Switch>

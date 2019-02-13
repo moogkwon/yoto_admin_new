@@ -1,4 +1,5 @@
 import moment from 'moment'
+import { toast } from 'react-toastify'
 
 export const removeNonNumber = (string = '') => string.replace(/[^\d]/g, '')
 export const removeLeadingSpaces = (string = '') => string.replace(/^\s+/g, '')
@@ -8,7 +9,7 @@ export function getMessageError (response) {
     if (response.data && response.data.message) {
       return response.data.message
     } else {
-      return 'unknownError'
+      return response.problem
     }
   } else {
     return 'unknownError'
@@ -57,4 +58,10 @@ export function yearsRevenue (startYear) {
   }
 
   return years
+}
+
+export function showError (errorMessage, details) {
+  toast.error(errorMessage, {
+    autoClose: 3000
+  })
 }

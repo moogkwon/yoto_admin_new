@@ -12,11 +12,14 @@
 
 import { call, put } from 'redux-saga/effects'
 import AuthActions from '../redux/AuthRedux'
-import { getMessageError } from '../utilities/utils'
+import { getMessageError, showError } from '../utilities/utils'
+import { showLoading, hideLoading } from 'react-redux-loading-bar'
 
-export function * login (api, { username, password }) {
+export function * login (api, { email, password }) {
+  yield put(showLoading())
   // make the call to the api
-  const response = yield call(api.login, username, password)
+  const response = yield call(api.login, email, password)
+  yield put(hideLoading())
   // success?
   if (response.ok) {
     const data = response.data.data
@@ -25,5 +28,6 @@ export function * login (api, { username, password }) {
   } else {
     // dispatch failure
     yield put(AuthActions.loginFailure(getMessageError(response)))
+    showError(getMessageError(response))
   }
 }
