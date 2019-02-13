@@ -1,36 +1,35 @@
-import React, { Component } from 'react';
-import { Badge, Card, CardBody, CardHeader, Col, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText, Row, TabContent, TabPane } from 'reactstrap';
+import React, { Component } from 'react'
+import { Badge, Card, CardBody, CardHeader, Col, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText, Row, TabContent, TabPane } from 'reactstrap'
 
 class ListGroups extends Component {
+  constructor (props) {
+    super(props)
 
-  constructor(props) {
-    super(props);
-
-    this.toggle = this.toggle.bind(this);
+    this.toggle = this.toggle.bind(this)
     this.state = {
       activeTab: 1
-    };
-  }
-
-  toggle(tab) {
-    if (this.state.activeTab !== tab) {
-      this.setState({
-        activeTab: tab
-      });
     }
   }
 
-  render() {
+  toggle (tab) {
+    if (this.state.activeTab !== tab) {
+      this.setState({
+        activeTab: tab
+      })
+    }
+  }
+
+  render () {
     return (
-      <div className="animated fadeIn">
+      <div className='animated fadeIn'>
         <Row>
-          <Col sm="12" xl="6">
+          <Col sm='12' xl='6'>
             <Card>
               <CardHeader>
-                <i className="fa fa-align-justify"></i><strong>List Group</strong>
-                <div className="card-header-actions">
-                  <a href="https://reactstrap.github.io/components/listgroup/" rel="noreferrer noopener" target="_blank" className="card-header-action">
-                    <small className="text-muted">docs</small>
+                <i className='fa fa-align-justify' /><strong>List Group</strong>
+                <div className='card-header-actions'>
+                  <a href='https://reactstrap.github.io/components/listgroup/' rel='noreferrer noopener' target='_blank' className='card-header-action'>
+                    <small className='text-muted'>docs</small>
                   </a>
                 </div>
               </CardHeader>
@@ -45,101 +44,101 @@ class ListGroups extends Component {
               </CardBody>
             </Card>
           </Col>
-          <Col sm="12" xl="6">
+          <Col sm='12' xl='6'>
             <Card>
               <CardHeader>
-                <i className="fa fa-align-justify"></i><strong>List Group</strong>
+                <i className='fa fa-align-justify' /><strong>List Group</strong>
                 <small> tags</small>
               </CardHeader>
               <CardBody>
                 <ListGroup>
-                  <ListGroupItem className="justify-content-between">Cras justo odio <Badge className="float-right" pill>14</Badge></ListGroupItem>
-                  <ListGroupItem className="justify-content-between">Dapibus ac facilisis in <Badge className="float-right" pill>2</Badge></ListGroupItem>
-                  <ListGroupItem className="justify-content-between">Morbi leo risus <Badge className="float-right" pill
-                                                                                            color="warning">1</Badge></ListGroupItem>
+                  <ListGroupItem className='justify-content-between'>Cras justo odio <Badge className='float-right' pill>14</Badge></ListGroupItem>
+                  <ListGroupItem className='justify-content-between'>Dapibus ac facilisis in <Badge className='float-right' pill>2</Badge></ListGroupItem>
+                  <ListGroupItem className='justify-content-between'>Morbi leo risus <Badge className='float-right' pill
+                    color='warning'>1</Badge></ListGroupItem>
                 </ListGroup>
               </CardBody>
             </Card>
           </Col>
         </Row>
         <Row>
-          <Col sm="12" xl="6">
+          <Col sm='12' xl='6'>
             <Card>
               <CardHeader>
-                <i className="fa fa-align-justify"></i><strong>List Group</strong>
+                <i className='fa fa-align-justify' /><strong>List Group</strong>
                 <small> disabled items</small>
               </CardHeader>
               <CardBody>
                 <ListGroup>
-                  <ListGroupItem disabled tag="a" href="#">Cras justo odio</ListGroupItem>
-                  <ListGroupItem tag="a" href="#">Dapibus ac facilisis in</ListGroupItem>
-                  <ListGroupItem disabled tag="a" href="#">Morbi leo risus</ListGroupItem>
-                  <ListGroupItem tag="a" href="#">Porta ac consectetur ac</ListGroupItem>
-                  <ListGroupItem tag="a" href="#">Vestibulum at eros</ListGroupItem>
+                  <ListGroupItem disabled tag='a' href='#'>Cras justo odio</ListGroupItem>
+                  <ListGroupItem tag='a' href='#'>Dapibus ac facilisis in</ListGroupItem>
+                  <ListGroupItem disabled tag='a' href='#'>Morbi leo risus</ListGroupItem>
+                  <ListGroupItem tag='a' href='#'>Porta ac consectetur ac</ListGroupItem>
+                  <ListGroupItem tag='a' href='#'>Vestibulum at eros</ListGroupItem>
                 </ListGroup>
               </CardBody>
             </Card>
           </Col>
-          <Col sm="12" xl="6">
+          <Col sm='12' xl='6'>
             <Card>
               <CardHeader>
-                <i className="fa fa-align-justify"></i><strong>List Group</strong>
+                <i className='fa fa-align-justify' /><strong>List Group</strong>
                 <small> contextual classes</small>
               </CardHeader>
               <CardBody>
                 <ListGroup>
-                  <ListGroupItem action color="success">Cras justo odio</ListGroupItem>
-                  <ListGroupItem action color="info">Dapibus ac facilisis in</ListGroupItem>
-                  <ListGroupItem action color="warning">Morbi leo risus</ListGroupItem>
-                  <ListGroupItem action color="danger">Porta ac consectetur ac</ListGroupItem>
+                  <ListGroupItem action color='success'>Cras justo odio</ListGroupItem>
+                  <ListGroupItem action color='info'>Dapibus ac facilisis in</ListGroupItem>
+                  <ListGroupItem action color='warning'>Morbi leo risus</ListGroupItem>
+                  <ListGroupItem action color='danger'>Porta ac consectetur ac</ListGroupItem>
                 </ListGroup>
               </CardBody>
             </Card>
           </Col>
         </Row>
         <Row>
-          <Col sm="12" xl="6">
+          <Col sm='12' xl='6'>
             <Card>
               <CardHeader>
-                <i className="fa fa-align-justify"></i><strong>List Group</strong>
+                <i className='fa fa-align-justify' /><strong>List Group</strong>
                 <small> anchors</small>
               </CardHeader>
               <CardBody>
                 <p>Be sure to <strong>not use the standard <code>.btn</code> classes here</strong>.</p>
                 <ListGroup>
-                  <ListGroupItem active tag="a" href="#" action>Cras justo odio</ListGroupItem>
-                  <ListGroupItem tag="a" href="#" action>Dapibus ac facilisis in</ListGroupItem>
-                  <ListGroupItem tag="a" href="#" action>Morbi leo risus</ListGroupItem>
-                  <ListGroupItem tag="a" href="#" action>Porta ac consectetur ac</ListGroupItem>
-                  <ListGroupItem disabled tag="a" href="#" action>Vestibulum at eros</ListGroupItem>
+                  <ListGroupItem active tag='a' href='#' action>Cras justo odio</ListGroupItem>
+                  <ListGroupItem tag='a' href='#' action>Dapibus ac facilisis in</ListGroupItem>
+                  <ListGroupItem tag='a' href='#' action>Morbi leo risus</ListGroupItem>
+                  <ListGroupItem tag='a' href='#' action>Porta ac consectetur ac</ListGroupItem>
+                  <ListGroupItem disabled tag='a' href='#' action>Vestibulum at eros</ListGroupItem>
                 </ListGroup>
                 <p />
               </CardBody>
             </Card>
           </Col>
-          <Col sm="12" xl="6">
+          <Col sm='12' xl='6'>
             <Card>
               <CardHeader>
-                <i className="fa fa-align-justify"></i><strong>List Group</strong>
+                <i className='fa fa-align-justify' /><strong>List Group</strong>
                 <small> buttons</small>
               </CardHeader>
               <CardBody>
                 <ListGroup>
-                  <ListGroupItem active tag="button" action>Cras justo odio</ListGroupItem>
-                  <ListGroupItem tag="button" action>Dapibus ac facilisis in</ListGroupItem>
-                  <ListGroupItem tag="button" action>Morbi leo risus</ListGroupItem>
-                  <ListGroupItem tag="button" action>Porta ac consectetur ac</ListGroupItem>
-                  <ListGroupItem disabled tag="button" action>Vestibulum at eros</ListGroupItem>
+                  <ListGroupItem active tag='button' action>Cras justo odio</ListGroupItem>
+                  <ListGroupItem tag='button' action>Dapibus ac facilisis in</ListGroupItem>
+                  <ListGroupItem tag='button' action>Morbi leo risus</ListGroupItem>
+                  <ListGroupItem tag='button' action>Porta ac consectetur ac</ListGroupItem>
+                  <ListGroupItem disabled tag='button' action>Vestibulum at eros</ListGroupItem>
                 </ListGroup>
               </CardBody>
             </Card>
           </Col>
         </Row>
         <Row>
-          <Col sm="12" xl="6">
+          <Col sm='12' xl='6'>
             <Card>
               <CardHeader>
-                <i className="fa fa-align-justify"></i><strong>List Group</strong>
+                <i className='fa fa-align-justify' /><strong>List Group</strong>
                 <small> custom content</small>
               </CardHeader>
               <CardBody>
@@ -171,22 +170,22 @@ class ListGroups extends Component {
           <Col>
             <Card>
               <CardHeader>
-                <i className="fa fa-align-justify"></i><strong>List Group</strong> <small>with TabPanes</small>
-                <div className="card-header-actions">
+                <i className='fa fa-align-justify' /><strong>List Group</strong> <small>with TabPanes</small>
+                <div className='card-header-actions'>
                   <Badge>NEW</Badge>
                 </div>
               </CardHeader>
               <CardBody>
                 <Row>
-                  <Col xs="4">
-                    <ListGroup id="list-tab" role="tablist">
+                  <Col xs='4'>
+                    <ListGroup id='list-tab' role='tablist'>
                       <ListGroupItem onClick={() => this.toggle(0)} action active={this.state.activeTab === 0} >Home</ListGroupItem>
                       <ListGroupItem onClick={() => this.toggle(1)} action active={this.state.activeTab === 1} >Profile</ListGroupItem>
                       <ListGroupItem onClick={() => this.toggle(2)} action active={this.state.activeTab === 2} >Messages</ListGroupItem>
                       <ListGroupItem onClick={() => this.toggle(3)} action active={this.state.activeTab === 3} >Settings</ListGroupItem>
                     </ListGroup>
                   </Col>
-                  <Col xs="8">
+                  <Col xs='8'>
                     <TabContent activeTab={this.state.activeTab}>
                       <TabPane tabId={0} >
                         <p>Velit aute mollit ipsum ad dolor consectetur nulla officia culpa adipisicing exercitation fugiat tempor. Voluptate deserunt sit sunt
@@ -222,8 +221,8 @@ class ListGroups extends Component {
           </Col>
         </Row>
       </div>
-    );
+    )
   }
 }
 
-export default ListGroups;
+export default ListGroups

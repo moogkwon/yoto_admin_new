@@ -44,7 +44,7 @@ class App extends Component {
   render () {
     return (
       <Provider store={createStore()}>
-        <LoadingBar style={{ top: 0 }} />
+        <LoadingBar showFastActions />
         <ToastContainer />
         <ConnectedRouter history={history}>
           <Switch>
