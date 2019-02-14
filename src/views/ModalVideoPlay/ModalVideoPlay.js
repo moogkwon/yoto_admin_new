@@ -31,7 +31,7 @@ export default class ModalVideoPlay extends Component {
         color='primary'
       >
         <ModalHeader toggle={() => this.toggle()}>User profile</ModalHeader>
-        <ModalBody>
+        <ModalBody className='text-center'>
           {this.props.user && (
             this.props.user.profile_video_url
               ? (
@@ -45,7 +45,11 @@ export default class ModalVideoPlay extends Component {
                 </Player>
               )
               : this.props.user.profile_photo_url
-                ? <img src={this.props.user.profile_video_url} alt='profile photo' className='img-thumbnail img-fluid' />
+                ? <img
+                  src={this.props.user.profile_photo_url}
+                  alt='profile photo'
+                  className='img-thumbnail img-fluid'
+                />
                 : null
           )}
 

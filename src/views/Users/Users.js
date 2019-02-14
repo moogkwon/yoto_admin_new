@@ -17,6 +17,7 @@ import ModalConfirm from '../ModalConfirm/ModalConfirm'
 import Avatar from 'react-avatar'
 import ModalVideoPlay from '../ModalVideoPlay/ModalVideoPlay'
 import Pagination from 'react-js-pagination'
+import PaginationComponent from '../PaginationComponent/PaginationComponent'
 
 class Users extends Component {
   constructor (props) {
@@ -31,7 +32,7 @@ class Users extends Component {
   }
 
   getUsers () {
-    const query = this.state.query
+    const query = this.props.query
     this.props.getUsers(query)
   }
 
@@ -45,6 +46,12 @@ class Users extends Component {
 
   showUserVideo (user) {
     this.setState({ user }, () => this.refs.videoPlayer.toggle())
+  }
+
+  onPageChange (page) {
+    const query = this.props.query.asMutable()
+    query.page = page
+    this.props.getUsers(query)
   }
 
   renderRow (user) {
@@ -71,7 +78,7 @@ class Users extends Component {
             ? (
               <Button style={{ padding: 0 }} onClick={() => this.showUserVideo(user)}>
                 <Avatar
-                  size={50}
+                  size={30}
                   src={user.profile_photo_url}
                 />
               </Button>
@@ -85,7 +92,7 @@ class Users extends Component {
               : 'N/A'
           }
         </td>
-        <td>{user.country || 'N/A'}</td>
+        <td>{user.location_country || 'N/A'}</td>
         <td>{user.birth_year || 'N/A'}</td>
         <td>{user.gender || 'N/A'}</td>
         <td>{user.lgbtq && 'Y'}</td>
@@ -118,6 +125,12 @@ class Users extends Component {
                 </div>
               </CardHeader>
               <CardBody>
+                <PaginationComponent
+                  totalItems={this.props.query.total}
+                  pageSize={this.props.query.perPage}
+                  activePage={this.props.query.page}
+                  onSelect={page => this.onPageChange(page)}
+                />
                 <Table responsive hover>
                   <thead>
                     <tr>
@@ -137,6 +150,13 @@ class Users extends Component {
                     {userList.map((user, index) => this.renderRow(user, index))}
                   </tbody>
                 </Table>
+
+                <PaginationComponent
+                  totalItems={this.props.query.total}
+                  pageSize={this.props.query.perPage}
+                  activePage={this.props.query.page}
+                  onSelect={page => this.onPageChange(page)}
+                />
               </CardBody>
             </Card>
           </Col>

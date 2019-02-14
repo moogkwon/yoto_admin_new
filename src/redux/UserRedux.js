@@ -5,7 +5,7 @@ import Immutable from 'seamless-immutable'
 
 const { Types, Creators } = createActions({
   getUsers: ['query'],
-  getUsersSuccess: ['users'],
+  getUsersSuccess: ['result'],
   getUsersFailure: ['message'],
 
   getUser: ['userId'],
@@ -58,8 +58,19 @@ export const INITIAL_STATE = Immutable({
 /* ------------- Reducers ------------- */
 
 // request the data from an api
-export const getUsers = state => state.merge({ fetching: true })
-export const getUsersSuccess = (state, { users }) => state.merge({ fetching: false, isSuccess: true, users })
+export const getUsers = (state, { query }) => state.merge({ fetching: true, query })
+export const getUsersSuccess = (state, { result }) => state.merge({
+  fetching: false,
+  isSuccess: true,
+  users: result.data,
+  query: {
+    ...state.query,
+    lastPage: result.lastPage,
+    page: result.page,
+    perPage: result.perPage,
+    total: result.total
+  }
+})
 export const getUsersFailure = (state, { message }) => state.merge({ fetching: false, isSuccess: false, message })
 
 export const getUser = state => state.merge({ fetching: true })

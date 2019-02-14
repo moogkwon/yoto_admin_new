@@ -1,0 +1,6 @@
+{
+  "name": "PaginationComponent",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./PaginationComponent.js"
+}
