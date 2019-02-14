@@ -47,7 +47,7 @@ export default class ModalVideoPlay extends Component {
               : this.props.user.profile_photo_url
                 ? <img
                   src={this.props.user.profile_photo_url}
-                  alt='profile photo'
+                  alt='profile'
                   className='img-thumbnail img-fluid'
                 />
                 : null

@@ -48,7 +48,11 @@ export const INITIAL_STATE = Immutable({
   user: null,
   users: [],
   query: {
-    where: { is_admin: { $ne: true } }
+    where: { is_admin: { $ne: true } },
+    page: 1,
+    perPage: 10,
+    lastPage: 1,
+    total: 0
   },
   fetching: null,
   isSuccess: null,
