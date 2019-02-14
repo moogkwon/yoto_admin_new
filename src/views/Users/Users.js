@@ -8,16 +8,15 @@ import {
   Col,
   Row,
   Table,
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter
+  Button
 } from 'reactstrap'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import UserActions from '../../redux/UserRedux'
 import ModalConfirm from '../ModalConfirm/ModalConfirm'
+import Avatar from 'react-avatar'
+import ModalVideoPlay from '../ModalVideoPlay/ModalVideoPlay'
+import Pagination from 'react-js-pagination'
 
 class Users extends Component {
   constructor (props) {
@@ -40,12 +39,12 @@ class Users extends Component {
     this.setState({ user }, () => this.refs.confirmDelete.toggle())
   }
 
-  onClickReject (user) {
-    this.setState({ user }, () => this.refs.confirmReject.toggle())
-  }
-
   onClickBlock (user) {
     this.setState({ user }, () => this.refs.confirmBlock.toggle())
+  }
+
+  showUserVideo (user) {
+    this.setState({ user }, () => this.refs.videoPlayer.toggle())
   }
 
   renderRow (user) {
@@ -56,8 +55,36 @@ class Users extends Component {
     return (
       <tr key={user._id}>
         <th scope='row'><Link to={userLink}>{user._id.substring(20)}</Link></th>
-        <td><Link to={userLink}>{user.first_name} {user.last_name}</Link></td>
-        <td><Link to={userLink}>{user.first_name} {user.last_name}</Link></td>
+        <td>{user.first_name} {user.last_name}</td>
+        <td>
+          <Link to={userLink}>
+            <Avatar
+              size={30}
+              round='15px'
+              name={`${user.first_name} ${user.last_name}`}
+              src={user.avatar_url}
+            />
+          </Link>
+        </td>
+        <td>
+          {user.profile_photo_url
+            ? (
+              <Button style={{ padding: 0 }} onClick={() => this.showUserVideo(user)}>
+                <Avatar
+                  size={50}
+                  src={user.profile_photo_url}
+                />
+              </Button>
+            )
+            : user.profile_video_url
+              ? (
+                <Button onClick={() => this.showUserVideo(user)}>
+                  <i className='icon icon-control-play' />
+                </Button>
+              )
+              : 'N/A'
+          }
+        </td>
         <td>{user.country || 'N/A'}</td>
         <td>{user.birth_year || 'N/A'}</td>
         <td>{user.gender || 'N/A'}</td>
@@ -65,10 +92,10 @@ class Users extends Component {
         <td><Badge color={color}>{status}</Badge></td>
         <td>
           {user.is_blocked
-            ? <Button className='btn btn-sm btn-success' onClick={() => this.props.unblockUser(user._id)}>Unlock</Button>
-            : <Button className='btn btn-sm btn-warning' onClick={() => this.onClickBlock(user)}>Block</Button>
+            ? <Button className='btn btn-sm btn-brand btn-success' onClick={() => this.props.unblockUser(user._id)}><i className='icon-action-undo icons d-block' /></Button>
+            : <Button className='btn btn-sm btn-brand btn-warning' onClick={() => this.onClickBlock(user)}><i className='icon-ban icons d-block' /></Button>
           }
-          <Button className='btn btn-sm btn-danger ml-1' onClick={() => this.onClickDelete(user)}>Delete</Button>
+          <Button className='btn btn-sm btn-brand btn-danger ml-1' onClick={() => this.onClickDelete(user)}><i className='icon-close icons d-block' /></Button>
         </td>
       </tr>
     )
@@ -96,7 +123,8 @@ class Users extends Component {
                     <tr>
                       <th scope='col'>ID</th>
                       <th scope='col'>Name</th>
-                      <th scope='col'>Photo/video</th>
+                      <th scope='col'>Avatar</th>
+                      <th scope='col'>Profile</th>
                       <th scope='col'>Country</th>
                       <th scope='col'>Born</th>
                       <th scope='col'>Gender</th>
@@ -125,7 +153,7 @@ class Users extends Component {
           ref='confirmReject'
           color='warning'
           action='Reject'
-          message="Are you sure you want to reject user\'s profile?"
+          message="Are you sure you want to reject user's profile?"
           onConfirm={() => this.props.rejectProfile(this.state.user._id)}
         />
         <ModalConfirm
@@ -134,6 +162,12 @@ class Users extends Component {
           action='Block'
           message='Are you sure you want to block user?'
           onConfirm={() => this.props.blockUser(this.state.user._id)}
+        />
+
+        <ModalVideoPlay
+          ref='videoPlayer'
+          onReject={() => this.refs.confirmReject.toggle()}
+          user={this.state.user}
         />
       </div>
     )
