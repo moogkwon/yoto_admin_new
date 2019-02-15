@@ -93,8 +93,8 @@ class Users extends Component {
 
     return (
       <tr key={user._id}>
-        <th scope='row'><Link to={userLink}>{user._id.substring(20)}</Link></th>
-        <td>{user.name}</td>
+        <td scope='row'><Link to={userLink}>{user._id.substring(20)}</Link></td>
+        <td><Link to={userLink}><strong>{user.name}</strong></Link></td>
         <td>
           <Link to={userLink}>
             <Avatar
