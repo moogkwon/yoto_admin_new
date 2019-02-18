@@ -36,7 +36,7 @@ export function * getUsers (api) {
 export function * getUser (api, { userId }) {
   // make the call to the api
   const query = {
-    with: ['reports', 'reported']
+    with: ['reports.reportee', 'reporteds.user']
   }
   yield put(showLoading())
   const response = yield call(api.getUser, userId, query)
@@ -118,7 +118,7 @@ export function * rejectProfile (api, { userId }) {
     if (currentPath === '/users') {
       yield call(getUsers, api)
     } else {
-      yield put(push('/users'))
+      yield call(getUser, api, { userId })
     }
   } else {
     // dispatch failure
@@ -138,7 +138,7 @@ export function * blockUser (api, { userId }) {
     if (currentPath === '/users') {
       yield call(getUsers, api)
     } else {
-      yield put(push('/users'))
+      yield call(getUser, api, { userId })
     }
   } else {
     // dispatch failure
@@ -158,7 +158,7 @@ export function * unblockUser (api, { userId }) {
     if (currentPath === '/users') {
       yield call(getUsers, api)
     } else {
-      yield put(push('/users'))
+      yield call(getUser, api, { userId })
     }
   } else {
     // dispatch failure

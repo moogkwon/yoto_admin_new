@@ -19,13 +19,13 @@ class User extends Component {
     const { user, fetching } = this.props
     if (fetching || !user) return <Loading />
     // if (!user) return <Redirect to='/404' />
-    const status = user.is_blocked ? 'Blocked' : user.profile_rejected ? 'Rejected' : ''
+    const status = user.is_blocked ? 'Blocked' : user.profile_rejected ? 'Rejected' : '---'
     const color = user.is_blocked ? 'danger' : user.profile_rejected ? 'warning' : 'primary'
 
     return (
       <div className='animated fadeIn'>
         <Row>
-          <Col lg={6}>
+          <Col lg={8}>
             <Card>
               <CardHeader>
                 <strong><i className='icon-info pr-1' />Personal information</strong>
@@ -33,11 +33,11 @@ class User extends Component {
               <CardBody>
                 <Row>
                   <Col lg={4}>
-                    <img src={user.avatar_url} className='img-fluid img-thumbnail' />
+                    <img src={user.avatar_url} className='img-fluid img-thumbnail' alt='Avatar' />
                     {user.profile_photo_url
                       ? (
                         <Button onClick={() => this.refs.videoPlayer.toggle()} className='mt-1' style={{ padding: 0 }}>
-                          <img src={user.profile_photo_url} className='img-fluid img-thumbnail' />
+                          <img src={user.profile_photo_url} className='img-fluid img-thumbnail' alt='Profile' />
                         </Button>
                       )
                       : user.profile_video_url
@@ -50,7 +50,7 @@ class User extends Component {
                     }
                   </Col>
                   <Col lg={8}>
-                    <h5 className='text-info'>{user.name}</h5>
+                    <h5 className='text-info mt-1'>{user.name}</h5>
                     <Table responsive>
                       <tbody>
                         <tr>
@@ -79,16 +79,194 @@ class User extends Component {
                         </tr>
                       </tbody>
                     </Table>
+                    <div className='text-right'>
+                      {user.is_blocked
+                        ? <Button color='warning' className='mr-2' onClick={() => this.props.unblockUser(this.props.user._id)}>Unblock</Button>
+                        : <Button color='warning' className='mr-2' onClick={() => this.refs.confirmBlock.toggle()}>Block</Button>
+                      }
+                      <Button color='danger' className='mr-2' onClick={() => this.refs.confirmDelete.toggle()}>Delete</Button>
+                      <Link to='/users' className='btn-link'>Back</Link>
+                    </div>
                   </Col>
                 </Row>
-                <div className='text-right'>
-                  {user.is_blocked
-                    ? <Button color='warning' className='mr-2' onClick={() => this.props.unblockUser(this.props.user._id)}>unblock</Button>
-                    : <Button color='warning' className='mr-2' onClick={() => this.refs.confirmBlock.toggle()}>Block</Button>
-                  }
-                  <Button color='danger' className='mr-2' onClick={() => this.refs.confirmDelete.toggle()}>Delete</Button>
-                  <Link to='/users' className='btn-link'>Back</Link>
-                </div>
+              </CardBody>
+            </Card>
+          </Col>
+
+          <Col lg={4}>
+            <Card>
+              <CardHeader>
+                <strong><i className='icon-list pr-1' />Summary</strong>
+              </CardHeader>
+              <CardBody>
+                <Table responsive>
+                  <tbody>
+                    <tr>
+                      <th className='text-right'>Registered</th>
+                      <td>{(new Date()).toDateString()}</td>
+                    </tr>
+                    <tr>
+                      <th className='text-right'>Meet count</th>
+                      <td>{user.conversation_count || 0}</td>
+                    </tr>
+                    <tr>
+                      <th className='text-right'>Call time</th>
+                      <td>{user.call_time || 0}</td>
+                    </tr>
+                    <tr>
+                      <th className='text-right'>Subscription</th>
+                      <td>{user.subscription || 'N/A'}</td>
+                    </tr>
+                    <tr>
+                      <th className='text-right'>Report count</th>
+                      <td><div className='text-warning'>{user.report_count || 'N/A'}</div></td>
+                    </tr>
+                    <tr>
+                      <th className='text-right'>Reported count</th>
+                      <td><div className='text-danger'>{user.reported_count || 'N/A'}</div></td>
+                    </tr>
+                  </tbody>
+                </Table>
+              </CardBody>
+            </Card>
+          </Col>
+
+          <Col xs={12}>
+            <Card>
+              <CardHeader>
+                <strong><i className='icon-dislike pr-1' />Reported</strong>
+              </CardHeader>
+              <CardBody>
+                <Row>
+                  <Col lg={3} md={4}>
+                    <img src={user.avatar_url} className='img-fluid img-thumbnail' alt='Avatar' />
+                    <Table responsive>
+                      <tbody>
+                        <tr>
+                          <th className='text-right'>Reporter</th>
+                          <td>{'Anna'}</td>
+                        </tr>
+                        <tr>
+                          <th className='text-right'>Reason</th>
+                          <td>{'Nude'}</td>
+                        </tr>
+                        <tr>
+                          <th className='text-right'>Time</th>
+                          <td>{new Date(user.created_at).toDateString()}</td>
+                        </tr>
+                      </tbody>
+                    </Table>
+                  </Col>
+                  <Col lg={3} md={4}>
+                    <img src={user.avatar_url} className='img-fluid img-thumbnail' alt='Avatar' />
+                    <Table responsive>
+                      <tbody>
+                        <tr>
+                          <th className='text-right'>Reporter</th>
+                          <td>{'Anna'}</td>
+                        </tr>
+                        <tr>
+                          <th className='text-right'>Reason</th>
+                          <td>{'Nude'}</td>
+                        </tr>
+                        <tr>
+                          <th className='text-right'>Time</th>
+                          <td>{new Date(user.created_at).toDateString()}</td>
+                        </tr>
+                      </tbody>
+                    </Table>
+                  </Col>
+                  <Col lg={3} md={4}>
+                    <img src={user.avatar_url} className='img-fluid img-thumbnail' alt='Avatar' />
+                    <Table responsive>
+                      <tbody>
+                        <tr>
+                          <th className='text-right'>Reporter</th>
+                          <td>{'Anna'}</td>
+                        </tr>
+                        <tr>
+                          <th className='text-right'>Reason</th>
+                          <td>{'Nude'}</td>
+                        </tr>
+                        <tr>
+                          <th className='text-right'>Time</th>
+                          <td>{new Date(user.created_at).toDateString()}</td>
+                        </tr>
+                      </tbody>
+                    </Table>
+                  </Col>
+                </Row>
+
+              </CardBody>
+            </Card>
+          </Col>
+
+          <Col xs={12}>
+            <Card>
+              <CardHeader>
+                <strong><i className='icon-shield pr-1' />Reports</strong>
+              </CardHeader>
+              <CardBody>
+                <Row>
+                  <Col lg={3} md={4}>
+                    <img src={user.avatar_url} className='img-fluid img-thumbnail' alt='Avatar' />
+                    <Table responsive>
+                      <tbody>
+                        <tr>
+                          <th className='text-right'>Reportee</th>
+                          <td>{'Anna'}</td>
+                        </tr>
+                        <tr>
+                          <th className='text-right'>Reason</th>
+                          <td>{'Nude'}</td>
+                        </tr>
+                        <tr>
+                          <th className='text-right'>Time</th>
+                          <td>{new Date(user.created_at).toDateString()}</td>
+                        </tr>
+                      </tbody>
+                    </Table>
+                  </Col>
+                  <Col lg={3} md={4}>
+                    <img src={user.avatar_url} className='img-fluid img-thumbnail' alt='Avatar' />
+                    <Table responsive>
+                      <tbody>
+                        <tr>
+                          <th className='text-right'>Reporter</th>
+                          <td>{'Anna'}</td>
+                        </tr>
+                        <tr>
+                          <th className='text-right'>Reason</th>
+                          <td>{'Nude'}</td>
+                        </tr>
+                        <tr>
+                          <th className='text-right'>Time</th>
+                          <td>{new Date(user.created_at).toDateString()}</td>
+                        </tr>
+                      </tbody>
+                    </Table>
+                  </Col>
+                  <Col lg={3} md={4}>
+                    <img src={user.avatar_url} className='img-fluid img-thumbnail' alt='Avatar' />
+                    <Table responsive>
+                      <tbody>
+                        <tr>
+                          <th className='text-right'>Reporter</th>
+                          <td>{'Anna'}</td>
+                        </tr>
+                        <tr>
+                          <th className='text-right'>Reason</th>
+                          <td>{'Nude'}</td>
+                        </tr>
+                        <tr>
+                          <th className='text-right'>Time</th>
+                          <td>{new Date(user.created_at).toDateString()}</td>
+                        </tr>
+                      </tbody>
+                    </Table>
+                  </Col>
+                </Row>
+
               </CardBody>
             </Card>
           </Col>
@@ -121,7 +299,7 @@ class User extends Component {
           message='Are you sure you want to block user?'
           onConfirm={() => this.props.blockUser(this.props.user._id)}
         />
-      </div>
+      </div >
     )
   }
 }

@@ -63,7 +63,7 @@ const create = (baseURL = AppConfig.apiURL) => {
   const refreshToken = (refreshToken) => api.post('/auth/refresh', { refresh_token: refreshToken })
 
   const getUsers = (query) => api.get('/users', { query })
-  const getUser = (id) => api.get(`/users/${id}`)
+  const getUser = (id, query) => api.get(`/users/${id}`, { query })
   const deleteUser = (id) => api.delete(`/users/${id}`)
   const updateUser = (id) => api.put(`/users/${id}`)
   const rejectProfile = (id) => api.put(`/users/${id}/reject`)

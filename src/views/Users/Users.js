@@ -93,7 +93,7 @@ class Users extends Component {
 
     return (
       <tr key={user._id}>
-        <td scope='row'><Link to={userLink}>{user._id.substring(20)}</Link></td>
+        <td><Link to={userLink}>{user._id.substring(20)}</Link></td>
         <td><Link to={userLink}><strong>{user.name}</strong></Link></td>
         <td>
           <Link to={userLink}>
@@ -132,7 +132,7 @@ class Users extends Component {
         <td>
           {user.is_blocked
             ? <Button className='btn btn-sm btn-brand btn-success' onClick={() => this.props.unblockUser(user._id)}><i className='icon-action-undo icons d-block' /></Button>
-            : <Button className='btn btn-sm btn-brand btn-warning' onClick={() => this.onClickBlock(user)}><i className='icon-ban icons d-block' /></Button>
+            : <Button className='btn btn-sm btn-brand btn-warning' onClick={() => this.onClickBlock(user)}><i className='icon-shield icons d-block' /></Button>
           }
           <Button className='btn btn-sm btn-brand btn-danger ml-1' onClick={() => this.onClickDelete(user)}><i className='icon-close icons d-block' /></Button>
         </td>
