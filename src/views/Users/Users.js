@@ -18,10 +18,10 @@ import {
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import UserActions from '../../redux/UserRedux'
-import ModalConfirm from '../ModalConfirm/ModalConfirm'
+import ModalConfirm from '../Modals/ModalConfirm'
 import Avatar from 'react-avatar'
-import ModalVideoPlay from '../ModalVideoPlay/ModalVideoPlay'
-import PaginationComponent from '../PaginationComponent/PaginationComponent'
+import ModalVideoPlay from '../Modals/ModalVideoPlay'
+import Pager from '../Pager'
 
 class Users extends Component {
   constructor (props) {
@@ -209,7 +209,7 @@ class Users extends Component {
                   </tbody>
                 </Table>
 
-                <PaginationComponent
+                <Pager
                   totalItems={this.props.query.total}
                   pageSize={this.props.query.perPage}
                   activePage={this.props.query.page}

@@ -3,11 +3,11 @@ import { Card, CardBody, CardHeader, Col, Row, Table, Button, Badge } from 'reac
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import UserActions from '../../redux/UserRedux'
-import ModalConfirm from '../ModalConfirm/ModalConfirm'
+import ModalConfirm from '../ModalConfirm'
 // import Avatar from 'react-avatar'
-import Loading from '../Loading/Loading'
+import Loading from '../Loading'
 // import { Redirect } from 'react-router-dom'
-import ModalVideoPlay from '../ModalVideoPlay/ModalVideoPlay'
+import ModalVideoPlay from '../ModalVideoPlay'
 import { Link } from 'react-router-dom'
 
 class User extends Component {

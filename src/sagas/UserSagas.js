@@ -15,6 +15,7 @@ import UserActions from '../redux/UserRedux'
 import { getMessageError, showError } from '../utilities/utils'
 import { showLoading, resetLoading } from 'react-redux-loading-bar'
 import { goBack, push } from 'connected-react-router'
+import { getReports } from './ReportSagas'
 
 export function * getUsers (api) {
   const query = yield select(state => state.user.query)
@@ -25,7 +26,7 @@ export function * getUsers (api) {
   // success?
   if (response.ok) {
     // dispatch successful getUserss
-    yield put(UserActions.getUsersSuccess(response.data.data))
+    yield put(UserActions.getUsersSuccess(response.data))
   } else {
     // dispatch failure
     yield put(UserActions.getUsersFailure(getMessageError(response)))
@@ -94,7 +95,7 @@ export function * deleteUser (api, { userId }) {
   if (response.ok) {
     // dispatch successful deleteUsers
     yield put(UserActions.deleteUserSuccess(response.data.data))
-    const currentPath = yield select(state => state.router.pathname)
+    const currentPath = yield select(state => state.router.location.pathname)
     if (currentPath === '/users') {
       yield call(getUsers, api)
     } else {
@@ -114,7 +115,7 @@ export function * rejectProfile (api, { userId }) {
   if (response.ok) {
     // dispatch successful rejectProfile
     yield put(UserActions.rejectProfileSuccess(response.data.data))
-    const currentPath = yield select(state => state.router.pathname)
+    const currentPath = yield select(state => state.router.location.pathname)
     if (currentPath === '/users') {
       yield call(getUsers, api)
     } else {
@@ -134,9 +135,12 @@ export function * blockUser (api, { userId }) {
   if (response.ok) {
     // dispatch successful blockUsers
     yield put(UserActions.blockUserSuccess(response.data.data))
-    const currentPath = yield select(state => state.router.pathname)
+    const currentPath = yield select(state => state.router.location.pathname)
+    console.log(currentPath)
     if (currentPath === '/users') {
       yield call(getUsers, api)
+    } else if (currentPath === '/reports') {
+      yield call(getReports, api)
     } else {
       yield call(getUser, api, { userId })
     }
@@ -154,7 +158,7 @@ export function * unblockUser (api, { userId }) {
   if (response.ok) {
     // dispatch successful unblockUsers
     yield put(UserActions.unblockUserSuccess(response.data.data))
-    const currentPath = yield select(state => state.router.pathname)
+    const currentPath = yield select(state => state.router.location.pathname)
     if (currentPath === '/users') {
       yield call(getUsers, api)
     } else {
