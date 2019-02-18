@@ -73,6 +73,12 @@ class Login extends Component {
                             value={this.state.data.email}
                             onChange={event => this.setState({ data: { ...this.state.data, email: event.target.value } })}
                             className={classNames({ 'is-invalid': this.state.errors && this.state.errors.has('email') })}
+                            onKeyPress={e => {
+                              if (e.key === 'Enter') {
+                                e.preventDefault()
+                                this.refs.password.focus()
+                              }
+                            }}
                           />
                           {this.state.errors && this.state.errors.has('email') && (
                             <div className='invalid-feedback'>{this.state.errors.first('email')}</div>
@@ -86,12 +92,19 @@ class Login extends Component {
                           </InputGroupText>
                         </InputGroupAddon>
                         <Input
+                          ref='password'
                           type='password'
                           placeholder='Password'
                           autoComplete='current-password'
                           value={this.state.data.password}
                           onChange={event => this.setState({ data: { ...this.state.data, password: event.target.value } })}
                           className={classNames({ 'is-invalid': this.state.errors && this.state.errors.has('password') })}
+                          onKeyPress={e => {
+                            if (e.key === 'Enter') {
+                              e.preventDefault()
+                              this.formSubmit()
+                            }
+                          }}
                         />
                         {this.state.errors && this.state.errors.has('password') && (
                           <div className='invalid-feedback'>{this.state.errors.first('password')}</div>
