@@ -9,10 +9,18 @@ import Loading from '../Loading'
 // import { Redirect } from 'react-router-dom'
 import ModalVideoPlay from '../ModalVideoPlay'
 import { Link } from 'react-router-dom'
+import dayjs from 'dayjs'
 
 class User extends Component {
   componentWillMount () {
     this.props.getUser(this.props.match.params.id)
+  }
+
+  componentDidUpdate (prevProps) {
+    // Typical usage (don't forget to compare props):
+    if (this.props.match.params.id !== prevProps.match.params.id) {
+      this.props.getUser(this.props.match.params.id)
+    }
   }
 
   render () {
@@ -103,7 +111,7 @@ class User extends Component {
                   <tbody>
                     <tr>
                       <th className='text-right'>Registered</th>
-                      <td>{(new Date()).toDateString()}</td>
+                      <td>{dayjs(user.created_at).format('MM/DD/YYYY')}</td>
                     </tr>
                     <tr>
                       <th className='text-right'>Meet count</th>
@@ -134,67 +142,32 @@ class User extends Component {
           <Col xs={12}>
             <Card>
               <CardHeader>
-                <strong><i className='icon-dislike pr-1' />Reported</strong>
+                <strong><i className='icon-dislike pr-1' />Be Reported</strong>
               </CardHeader>
               <CardBody>
+                {(!user.reporteds || !user.reporteds.length) && <h4>No report</h4>}
                 <Row>
-                  <Col lg={3} md={4}>
-                    <img src={user.avatar_url} className='img-fluid img-thumbnail' alt='Avatar' />
-                    <Table responsive>
-                      <tbody>
-                        <tr>
-                          <th className='text-right'>Reporter</th>
-                          <td>{'Anna'}</td>
-                        </tr>
-                        <tr>
-                          <th className='text-right'>Reason</th>
-                          <td>{'Nude'}</td>
-                        </tr>
-                        <tr>
-                          <th className='text-right'>Time</th>
-                          <td>{new Date(user.created_at).toDateString()}</td>
-                        </tr>
-                      </tbody>
-                    </Table>
-                  </Col>
-                  <Col lg={3} md={4}>
-                    <img src={user.avatar_url} className='img-fluid img-thumbnail' alt='Avatar' />
-                    <Table responsive>
-                      <tbody>
-                        <tr>
-                          <th className='text-right'>Reporter</th>
-                          <td>{'Anna'}</td>
-                        </tr>
-                        <tr>
-                          <th className='text-right'>Reason</th>
-                          <td>{'Nude'}</td>
-                        </tr>
-                        <tr>
-                          <th className='text-right'>Time</th>
-                          <td>{new Date(user.created_at).toDateString()}</td>
-                        </tr>
-                      </tbody>
-                    </Table>
-                  </Col>
-                  <Col lg={3} md={4}>
-                    <img src={user.avatar_url} className='img-fluid img-thumbnail' alt='Avatar' />
-                    <Table responsive>
-                      <tbody>
-                        <tr>
-                          <th className='text-right'>Reporter</th>
-                          <td>{'Anna'}</td>
-                        </tr>
-                        <tr>
-                          <th className='text-right'>Reason</th>
-                          <td>{'Nude'}</td>
-                        </tr>
-                        <tr>
-                          <th className='text-right'>Time</th>
-                          <td>{new Date(user.created_at).toDateString()}</td>
-                        </tr>
-                      </tbody>
-                    </Table>
-                  </Col>
+                  {user.reporteds.map(report => (
+                    <Col lg={3} md={4} key={report._id}>
+                      <img src={report.file_url} className='img-fluid img-thumbnail mb-3' alt='Avatar' />
+                      <Table responsive>
+                        <tbody>
+                          <tr>
+                            <th className='text-right'>Reporter</th>
+                            <td><Link to={`/users/${report.user._id}`}>{report.user.name}</Link></td>
+                          </tr>
+                          <tr>
+                            <th className='text-right'>Reason</th>
+                            <td>{report.reason}</td>
+                          </tr>
+                          <tr>
+                            <th className='text-right'>Time</th>
+                            <td>{dayjs(report.created_at).format('MM/DD/YYYY HH:mm')}</td>
+                          </tr>
+                        </tbody>
+                      </Table>
+                    </Col>
+                  ))}
                 </Row>
 
               </CardBody>
@@ -207,64 +180,29 @@ class User extends Component {
                 <strong><i className='icon-shield pr-1' />Reports</strong>
               </CardHeader>
               <CardBody>
+                {(!user.reports || !user.reports.length) && <h4>No report</h4>}
                 <Row>
-                  <Col lg={3} md={4}>
-                    <img src={user.avatar_url} className='img-fluid img-thumbnail' alt='Avatar' />
-                    <Table responsive>
-                      <tbody>
-                        <tr>
-                          <th className='text-right'>Reportee</th>
-                          <td>{'Anna'}</td>
-                        </tr>
-                        <tr>
-                          <th className='text-right'>Reason</th>
-                          <td>{'Nude'}</td>
-                        </tr>
-                        <tr>
-                          <th className='text-right'>Time</th>
-                          <td>{new Date(user.created_at).toDateString()}</td>
-                        </tr>
-                      </tbody>
-                    </Table>
-                  </Col>
-                  <Col lg={3} md={4}>
-                    <img src={user.avatar_url} className='img-fluid img-thumbnail' alt='Avatar' />
-                    <Table responsive>
-                      <tbody>
-                        <tr>
-                          <th className='text-right'>Reporter</th>
-                          <td>{'Anna'}</td>
-                        </tr>
-                        <tr>
-                          <th className='text-right'>Reason</th>
-                          <td>{'Nude'}</td>
-                        </tr>
-                        <tr>
-                          <th className='text-right'>Time</th>
-                          <td>{new Date(user.created_at).toDateString()}</td>
-                        </tr>
-                      </tbody>
-                    </Table>
-                  </Col>
-                  <Col lg={3} md={4}>
-                    <img src={user.avatar_url} className='img-fluid img-thumbnail' alt='Avatar' />
-                    <Table responsive>
-                      <tbody>
-                        <tr>
-                          <th className='text-right'>Reporter</th>
-                          <td>{'Anna'}</td>
-                        </tr>
-                        <tr>
-                          <th className='text-right'>Reason</th>
-                          <td>{'Nude'}</td>
-                        </tr>
-                        <tr>
-                          <th className='text-right'>Time</th>
-                          <td>{new Date(user.created_at).toDateString()}</td>
-                        </tr>
-                      </tbody>
-                    </Table>
-                  </Col>
+                  {user.reports.map(report => (
+                    <Col lg={3} md={4} key={report._id}>
+                      <img src={report.file_url} className='img-fluid img-thumbnail mb-3' alt='Avatar' />
+                      <Table responsive>
+                        <tbody>
+                          <tr>
+                            <th className='text-right'>Reportee</th>
+                            <td><Link to={`/users/${report.reportee_id}`}>{report.reportee.name}</Link></td>
+                          </tr>
+                          <tr>
+                            <th className='text-right'>Reason</th>
+                            <td>{report.reason}</td>
+                          </tr>
+                          <tr>
+                            <th className='text-right'>Time</th>
+                            <td>{dayjs(report.created_at).format('MM/DD/YYYY HH:mm')}</td>
+                          </tr>
+                        </tbody>
+                      </Table>
+                    </Col>
+                  ))}
                 </Row>
 
               </CardBody>
