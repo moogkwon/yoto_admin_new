@@ -29,8 +29,8 @@ export default {
       icon: 'icon-shield'
     },
     {
-      name: 'Most report',
-      url: '/most-report',
+      name: 'Most reporter',
+      url: '/reports/most',
       icon: 'icon-dislike'
     },
     {

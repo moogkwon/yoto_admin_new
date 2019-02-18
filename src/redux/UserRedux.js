@@ -49,6 +49,7 @@ export const INITIAL_STATE = Immutable({
   users: [],
   query: {
     where: { is_admin: { $ne: true } },
+    search: '',
     page: 1,
     perPage: 10,
     lastPage: 1,

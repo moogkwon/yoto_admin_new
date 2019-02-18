@@ -15,7 +15,7 @@ import { ReportTypes } from '../redux/ReportRedux'
 import { startup } from './StartupSagas'
 import { login } from './AuthSagas'
 import { getUsers, getUser, createUser, updateUser, deleteUser, rejectProfile, blockUser, unblockUser } from './UserSagas'
-import { getReports } from './ReportSagas'
+import { getReports, getMostReports } from './ReportSagas'
 
 /* ------------- API ------------- */
 
@@ -43,6 +43,7 @@ export default function * root () {
     takeLatest(UserTypes.BLOCK_USER, blockUser, api),
     takeLatest(UserTypes.UNBLOCK_USER, unblockUser, api),
     // report
-    takeLatest(ReportTypes.GET_REPORTS, getReports, api)
+    takeLatest(ReportTypes.GET_REPORTS, getReports, api),
+    takeLatest(ReportTypes.GET_MOST_REPORTS, getMostReports, api)
   ])
 }

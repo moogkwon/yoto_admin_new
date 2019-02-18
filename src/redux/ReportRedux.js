@@ -8,17 +8,9 @@ const { Types, Creators } = createActions({
   getReportsSuccess: ['result'],
   getReportsFailure: ['message'],
 
-  getReport: ['reportId'],
-  getReportSuccess: ['report'],
-  getReportFailure: ['message'],
-
-  createReport: ['report'],
-  createReportSuccess: ['report'],
-  createReportFailure: ['message'],
-
-  updateReport: ['report'],
-  updateReportSuccess: ['report'],
-  updateReportFailure: ['message'],
+  getMostReports: ['mostQuery'],
+  getMostReportsSuccess: ['result'],
+  getMostReportsFailure: ['message'],
 
   deleteReport: ['reportId'],
   deleteReportSuccess: [],
@@ -39,6 +31,15 @@ export const INITIAL_STATE = Immutable({
     lastPage: 1,
     total: 0
   },
+  mostQuery: {
+    where: { is_blocked: { $ne: true }, report_count: { $gt: 0 } },
+    search: '',
+    page: 1,
+    perPage: 10,
+    lastPage: 1,
+    total: 0
+  },
+  mostReports: [],
   fetching: null,
   isSuccess: null,
   message: null
@@ -62,9 +63,20 @@ export const getReportsSuccess = (state, { result }) => state.merge({
 })
 export const getReportsFailure = (state, { message }) => state.merge({ fetching: false, isSuccess: false, message })
 
-export const getReport = state => state.merge({ fetching: true })
-export const getReportSuccess = (state, { report }) => state.merge({ fetching: false, isSuccess: true, report })
-export const getReportFailure = (state, { message }) => state.merge({ fetching: false, isSuccess: false, message })
+export const getMostReports = (state, { mostQuery }) => state.merge({ fetching: true, mostQuery })
+export const getMostReportsSuccess = (state, { result }) => state.merge({
+  fetching: false,
+  isSuccess: true,
+  mostReports: result.data,
+  mostQuery: {
+    ...state.mostQuery,
+    lastPage: result.lastPage,
+    page: result.page,
+    perPage: result.perPage,
+    total: result.total
+  }
+})
+export const getMostReportsFailure = (state, { message }) => state.merge({ fetching: false, isSuccess: false, message })
 
 export const deleteReport = state => state.merge({ fetching: true })
 export const deleteReportSuccess = (state) => state.merge({ fetching: false, isSuccess: true, report: null })
@@ -77,9 +89,9 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.GET_REPORTS_SUCCESS]: getReportsSuccess,
   [Types.GET_REPORTS_FAILURE]: getReportsFailure,
 
-  [Types.GET_REPORT]: getReport,
-  [Types.GET_REPORT_SUCCESS]: getReportSuccess,
-  [Types.GET_REPORT_FAILURE]: getReportFailure,
+  [Types.GET_MOST_REPORTS]: getMostReports,
+  [Types.GET_MOST_REPORTS_SUCCESS]: getMostReportsSuccess,
+  [Types.GET_MOST_REPORTS_FAILURE]: getMostReportsFailure,
 
   [Types.DELETE_REPORT]: deleteReport,
   [Types.DELETE_REPORT_SUCCESS]: deleteReportSuccess,

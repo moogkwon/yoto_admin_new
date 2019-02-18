@@ -72,3 +72,20 @@ export function * deleteReport (api, { reportId }) {
     showError(getMessageError(response))
   }
 }
+
+export function * getMostReports (api) {
+  const query = yield select(state => state.report.mostQuery)
+  // make the call to the api
+  yield put(showLoading())
+  const response = yield call(api.getUsers, query)
+  yield put(resetLoading())
+  // success?
+  if (response.ok) {
+    // dispatch successful getMostReports
+    yield put(ReportActions.getMostReportsSuccess(response.data))
+  } else {
+    // dispatch failure
+    yield put(ReportActions.getMostReportsFailure(getMessageError(response)))
+    showError(getMessageError(response))
+  }
+}
