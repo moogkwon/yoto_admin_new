@@ -80,8 +80,30 @@ class Reports extends Component {
     return (
       <tr key={report._id}>
         <td>{no}</td>
-        <td><Link to={reporterLink}>{report.user.name}</Link></td>
-        <td><Link to={reporteeLink}><strong>{report.reportee && report.reportee.name}</strong></Link></td>
+        <td>
+          <Link to={reporterLink}>
+            <Avatar
+              size={30}
+              round='15px'
+              name={report.user && report.user.name}
+              src={report.user && report.user.avatar_url}
+            />
+            {' '}
+            {report.user.name}
+          </Link>
+        </td>
+        <td>
+          <Link to={reporteeLink}>
+            <Avatar
+              size={30}
+              round='15px'
+              name={report.reportee && report.reportee.name}
+              src={report.reportee && report.reportee.avatar_url}
+            />
+            {' '}
+            <strong>{report.reportee && report.reportee.name}</strong>
+          </Link>
+        </td>
         <td>
           <Button style={{ padding: 0 }} onClick={() => this.showReportPhoto(report)}>
             <Avatar
