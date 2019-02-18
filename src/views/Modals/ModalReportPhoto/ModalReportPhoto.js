@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap'
 
-export default class ModalVideoPlay extends Component {
+export default class ModalReportPhoto extends Component {
   constructor (props) {
     super(props)
     this.state = {
