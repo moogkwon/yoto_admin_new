@@ -1,0 +1,6 @@
+{
+  "name": "ModalReportPhoto",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./ModalReportPhoto.js"
+}

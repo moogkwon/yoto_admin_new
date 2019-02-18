@@ -8,12 +8,14 @@ import DebugConfig from '../config/DebugConfig'
 import { StartupTypes } from '../redux/StartupRedux'
 import { AuthTypes } from '../redux/AuthRedux'
 import { UserTypes } from '../redux/UserRedux'
+import { ReportTypes } from '../redux/ReportRedux'
 
 /* ------------- Sagas ------------- */
 
 import { startup } from './StartupSagas'
 import { login } from './AuthSagas'
 import { getUsers, getUser, createUser, updateUser, deleteUser, rejectProfile, blockUser, unblockUser } from './UserSagas'
+import { getReports } from './ReportSagas'
 
 /* ------------- API ------------- */
 
@@ -31,7 +33,7 @@ export default function * root () {
     // some sagas receive extra parameters in addition to an action
     // auth
     takeLatest(AuthTypes.LOGIN, login, api),
-    // patient
+    // user
     takeLatest(UserTypes.GET_USERS, getUsers, api),
     takeLatest(UserTypes.GET_USER, getUser, api),
     takeLatest(UserTypes.CREATE_USER, createUser, api),
@@ -39,6 +41,8 @@ export default function * root () {
     takeLatest(UserTypes.DELETE_USER, deleteUser, api),
     takeLatest(UserTypes.REJECT_PROFILE, rejectProfile, api),
     takeLatest(UserTypes.BLOCK_USER, blockUser, api),
-    takeLatest(UserTypes.UNBLOCK_USER, unblockUser, api)
+    takeLatest(UserTypes.UNBLOCK_USER, unblockUser, api),
+    // report
+    takeLatest(ReportTypes.GET_REPORTS, getReports, api)
   ])
 }

@@ -25,7 +25,7 @@ export default {
     },
     {
       name: 'Report',
-      url: '/report',
+      url: '/reports',
       icon: 'icon-shield'
     },
     {

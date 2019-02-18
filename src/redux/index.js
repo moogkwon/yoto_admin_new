@@ -16,6 +16,7 @@ export const reducers = combineReducers({
   auth: require('./AuthRedux').reducer,
   user: require('./UserRedux').reducer,
   notification: require('./NotificationRedux').reducer,
+  report: require('./ReportRedux').reducer,
   loadingBar: loadingBarReducer
 })
 
