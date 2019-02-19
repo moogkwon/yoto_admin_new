@@ -8,6 +8,7 @@ import Loadable from 'react-loadable';
 import { ToastContainer } from 'react-toastify'
 import './App.scss';
 import 'react-toastify/dist/ReactToastify.css'
+import 'react-datepicker/dist/react-datepicker.css'
 import LoadingBar from 'react-redux-loading-bar'
 import loading from './views/Loading'
 

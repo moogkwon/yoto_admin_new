@@ -24,18 +24,18 @@ export default {
       icon: 'icon-user'
     },
     {
-      name: 'Report',
+      name: 'Reports',
       url: '/reports',
       icon: 'icon-shield'
     },
     {
-      name: 'Most reporter',
+      name: 'Most reporters',
       url: '/reports/most',
       icon: 'icon-dislike'
     },
     {
-      name: 'Notification',
-      url: '/notification',
+      name: 'Notifications',
+      url: '/notifications',
       icon: 'icon-bell'
     },
     {

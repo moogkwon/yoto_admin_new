@@ -9,13 +9,31 @@ import { StartupTypes } from '../redux/StartupRedux'
 import { AuthTypes } from '../redux/AuthRedux'
 import { UserTypes } from '../redux/UserRedux'
 import { ReportTypes } from '../redux/ReportRedux'
+import { NotificationTypes } from '../redux/NotificationRedux'
 
 /* ------------- Sagas ------------- */
 
 import { startup } from './StartupSagas'
 import { login } from './AuthSagas'
-import { getUsers, getUser, createUser, updateUser, deleteUser, rejectProfile, blockUser, unblockUser } from './UserSagas'
+import {
+  getUsers,
+  getUser,
+  createUser,
+  updateUser,
+  deleteUser,
+  rejectProfile,
+  blockUser,
+  unblockUser,
+  getUserCount
+} from './UserSagas'
 import { getReports, getMostReports } from './ReportSagas'
+import {
+  getNotifications,
+  getNotification,
+  createNotification,
+  updateNotification,
+  deleteNotification
+} from './NotificationSagas'
 
 /* ------------- API ------------- */
 
@@ -42,8 +60,15 @@ export default function * root () {
     takeLatest(UserTypes.REJECT_PROFILE, rejectProfile, api),
     takeLatest(UserTypes.BLOCK_USER, blockUser, api),
     takeLatest(UserTypes.UNBLOCK_USER, unblockUser, api),
+    takeLatest(UserTypes.GET_USER_COUNT, getUserCount, api),
     // report
     takeLatest(ReportTypes.GET_REPORTS, getReports, api),
-    takeLatest(ReportTypes.GET_MOST_REPORTS, getMostReports, api)
+    takeLatest(ReportTypes.GET_MOST_REPORTS, getMostReports, api),
+    // notification
+    takeLatest(NotificationTypes.GET_NOTIFICATIONS, getNotifications, api),
+    takeLatest(NotificationTypes.GET_NOTIFICATION, getNotification, api),
+    takeLatest(NotificationTypes.CREATE_NOTIFICATION, createNotification, api),
+    takeLatest(NotificationTypes.UPDATE_NOTIFICATION, updateNotification, api),
+    takeLatest(NotificationTypes.DELETE_NOTIFICATION, deleteNotification, api)
   ])
 }

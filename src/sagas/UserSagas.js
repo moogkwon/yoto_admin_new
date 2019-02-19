@@ -34,6 +34,23 @@ export function * getUsers (api) {
   }
 }
 
+export function * getUserCount (api, { query }) {
+  // const query = yield select(state => state.user.query)
+  // make the call to the api
+  yield put(showLoading())
+  const response = yield call(api.getUserCount, query)
+  yield put(resetLoading())
+  // success?
+  if (response.ok) {
+    // dispatch successful getUserCount
+    yield put(UserActions.getUserCountSuccess(response.data.data.userCount))
+  } else {
+    // dispatch failure
+    yield put(UserActions.getUserCountFailure(getMessageError(response)))
+    showError(getMessageError(response))
+  }
+}
+
 export function * getUser (api, { userId }) {
   // make the call to the api
   const query = {

@@ -8,6 +8,10 @@ const { Types, Creators } = createActions({
   getUsersSuccess: ['result'],
   getUsersFailure: ['message'],
 
+  getUserCount: ['query'],
+  getUserCountSuccess: ['userCount'],
+  getUserCountFailure: ['message'],
+
   getUser: ['userId'],
   getUserSuccess: ['user'],
   getUserFailure: ['message'],
@@ -78,6 +82,10 @@ export const getUsersSuccess = (state, { result }) => state.merge({
 })
 export const getUsersFailure = (state, { message }) => state.merge({ fetching: false, isSuccess: false, message })
 
+export const getUserCount = state => state.merge({ fetching: true })
+export const getUserCountSuccess = (state, { userCount }) => state.merge({ fetching: false, isSuccess: true, userCount })
+export const getUserCountFailure = (state, { message }) => state.merge({ fetching: false, isSuccess: false, message })
+
 export const getUser = state => state.merge({ fetching: true })
 export const getUserSuccess = (state, { user }) => state.merge({ fetching: false, isSuccess: true, user })
 export const getUserFailure = (state, { message }) => state.merge({ fetching: false, isSuccess: false, message })
@@ -114,6 +122,10 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.GET_USERS]: getUsers,
   [Types.GET_USERS_SUCCESS]: getUsersSuccess,
   [Types.GET_USERS_FAILURE]: getUsersFailure,
+
+  [Types.GET_USER_COUNT]: getUserCount,
+  [Types.GET_USER_COUNT_SUCCESS]: getUserCountSuccess,
+  [Types.GET_USER_COUNT_FAILURE]: getUserCountFailure,
 
   [Types.GET_USER]: getUser,
   [Types.GET_USER_SUCCESS]: getUserSuccess,

@@ -69,8 +69,15 @@ const create = (baseURL = AppConfig.apiURL) => {
   const rejectProfile = (id) => api.put(`/users/${id}/reject`)
   const blockUser = (id) => api.put(`/users/${id}/block`)
   const unblockUser = (id) => api.put(`/users/${id}/unblock`)
+  const getUserCount = (query) => api.get('/users/count', { query })
   // report
   const getReports = (query) => api.get('/reports', { query })
+  // notification
+  const getNotifications = (query) => api.get('/notifications', { query })
+  const createNotification = (notification) => api.post(`/notifications`, notification)
+  const getNotification = (id, query) => api.get(`/notifications/${id}`, { query })
+  const deleteNotification = (id) => api.delete(`/notifications/${id}`)
+  const updateNotification = (id) => api.put(`/notifications/${id}`)
 
   // ------
   // STEP 3
@@ -98,8 +105,15 @@ const create = (baseURL = AppConfig.apiURL) => {
     rejectProfile,
     blockUser,
     unblockUser,
+    getUserCount,
     // report
-    getReports
+    getReports,
+    // user
+    getNotifications,
+    getNotification,
+    createNotification,
+    updateNotification,
+    deleteNotification
   }
 }
 

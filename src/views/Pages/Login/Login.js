@@ -15,7 +15,7 @@ import {
   Row,
   FormGroup
 } from 'reactstrap'
-import Validator from 'validatorjs'
+import Validator from 'validatorjs/dist/validator'
 import classNames from 'classnames'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'

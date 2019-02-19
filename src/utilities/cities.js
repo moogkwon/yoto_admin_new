@@ -1,21 +1,23 @@
 import CITIES from '../fixtures/cities'
 import STATES from '../fixtures/states'
-import _ from 'lodash'
+import sortBy from 'lodash/sortBy'
+import map from 'lodash/map'
+import filter from 'lodash/filter'
 
 export function cities () {
-  const data = _.map(CITIES, (city) => {
+  const data = map(CITIES, (city) => {
     return {
       name: city.name,
       label: city.name_with_type,
       value: city.code
     }
   })
-  return _.sortBy(data, city => city.name)
+  return sortBy(data, city => city.name)
 }
 
 export function states (code) {
   if (code) {
-    const data = _.map(STATES, (state) => {
+    const data = map(STATES, (state) => {
       return {
         name: state.name,
         label: state.name_with_type,
@@ -23,8 +25,8 @@ export function states (code) {
         parentCode: state.parent_code
       }
     })
-    const filterData = _.filter(data, value => value.parentCode === code)
-    return _.sortBy(filterData, state => state.name)
+    const filterData = filter(data, value => value.parentCode === code)
+    return sortBy(filterData, state => state.name)
   } else {
     return []
   }
