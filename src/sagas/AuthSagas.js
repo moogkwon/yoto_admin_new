@@ -23,9 +23,9 @@ export function * login (api, { data }) {
   yield put(resetLoading())
   // success?
   if (response.ok) {
-    const data = response.data.data
+    const data = response.data
     // dispatch successful logins
-    yield put(AuthActions.loginSuccess(data))
+    yield put(AuthActions.loginSuccess({ token: data.token, refreshToken: data.refreshToken, user: data.data }))
     yield call(api.setToken, data.token)
     yield put(push('/dashboard'))
   } else {
