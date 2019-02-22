@@ -3,26 +3,26 @@ import { Bar, Line } from 'react-chartjs-2';
 import {
   // Badge,
   // Button,
-  ButtonDropdown,
-  ButtonGroup,
+  // ButtonDropdown,
+  // ButtonGroup,
   // ButtonToolbar,
   Card,
   CardBody,
   // CardFooter,
-  CardHeader,
+  // CardHeader,
   // CardTitle,
   Col,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownToggle,
-  Progress,
+  // Dropdown,
+  // DropdownItem,
+  // DropdownMenu,
+  // DropdownToggle,
+  // Progress,
   Row,
-  Table,
+  // Table,
 } from 'reactstrap';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 import { getStyle } from '@coreui/coreui/dist/js/coreui-utilities'
-import { bindActionCreators } from 'redux'
+// import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 const Widget03 = lazy(() => import('../../views/Widgets/Widget03'));

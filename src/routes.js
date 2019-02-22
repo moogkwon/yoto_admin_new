@@ -3,7 +3,7 @@ import DefaultLayout from './containers/DefaultLayout';
 
 const Dashboard = React.lazy(() => import('./views/Dashboard'));
 const Users = React.lazy(() => import('./views/Users'));
-const User = React.lazy(() => import('./views/Users'));
+const User = React.lazy(() => import('./views/Users/User'));
 const Reports = React.lazy(() => import('./views/Reports'));
 const MostReports = React.lazy(() => import('./views/Reports/MostReports'));
 const Notifications = React.lazy(() => import('./views/Notifications'));
