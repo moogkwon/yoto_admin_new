@@ -50,11 +50,11 @@ export default {
       name: 'Payments',
       url: '/payments',
       icon: 'icon-credit-card'
-    },
-    {
-      name: 'Conversations',
-      url: '/conversations',
-      icon: 'icon-bubbles'
     }
+    // {
+    //   name: 'Conversations',
+    //   url: '/conversations',
+    //   icon: 'icon-bubbles'
+    // }
   ]
 }

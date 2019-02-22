@@ -6,6 +6,8 @@ import PropTypes from 'prop-types'
 import { AppHeaderDropdown, AppNavbarBrand, AppSidebarToggler } from '@coreui/react'
 import logo from '../../assets/img/brand/logo.svg'
 import sygnet from '../../assets/img/brand/sygnet.svg'
+import ReactAvatar from 'react-avatar'
+import { connect } from 'react-redux'
 
 const propTypes = {
   children: PropTypes.node
@@ -34,9 +36,9 @@ class DefaultHeader extends Component {
           <NavItem className='px-3'>
             <Link to='/users'>Users</Link>
           </NavItem>
-          <NavItem className='px-3'>
+          {/* <NavItem className='px-3'>
             <NavLink href='#'>Settings</NavLink>
-          </NavItem>
+          </NavItem> */}
         </Nav>
         <Nav className='ml-auto' navbar>
           <NavItem className='d-md-down-none'>
@@ -50,7 +52,8 @@ class DefaultHeader extends Component {
           </NavItem> */}
           <AppHeaderDropdown direction='down'>
             <DropdownToggle nav>
-              <img src={'../../assets/img/avatars/6.jpg'} className='img-avatar' alt='admin@bootstrapmaster.com' />
+              {/* <img src={'../../assets/img/avatars/6.jpg'} className='img-avatar' alt='admin@bootstrapmaster.com' /> */}
+              <ReactAvatar name={this.props.auth.user ? this.props.auth.user.name : 'N/A'} size='40' round='20\px' />
             </DropdownToggle>
             <DropdownMenu right style={{ right: 'auto' }}>
               {/* <DropdownItem header tag='div' className='text-center'><strong>Account</strong></DropdownItem>
@@ -59,10 +62,11 @@ class DefaultHeader extends Component {
               <DropdownItem><i className='fa fa-tasks' /> Tasks<Badge color='danger'>42</Badge></DropdownItem>
               <DropdownItem><i className='fa fa-comments' /> Comments<Badge color='warning'>42</Badge></DropdownItem> */}
               <DropdownItem header tag='div' className='text-center'><strong>Settings</strong></DropdownItem>
-              <DropdownItem><i className='fa fa-user' /> Profile</DropdownItem>
-              <DropdownItem><i className='fa fa-wrench' /> Settings</DropdownItem>
-              <DropdownItem><i className='fa fa-usd' /> Payments<Badge color='secondary'>42</Badge></DropdownItem>
-              <DropdownItem><i className='fa fa-file' /> Projects<Badge color='primary'>42</Badge></DropdownItem>
+              <DropdownItem><i className='fa fa-key' /> Password</DropdownItem>
+              {/* <DropdownItem><i className='fa fa-user' /> Profile</DropdownItem> */}
+              {/* <DropdownItem><i className='fa fa-wrench' /> Settings</DropdownItem> */}
+              {/* <DropdownItem><i className='fa fa-usd' /> Payments<Badge color='secondary'>42</Badge></DropdownItem> */}
+              {/* <DropdownItem><i className='fa fa-file' /> Projects<Badge color='primary'>42</Badge></DropdownItem> */}
               <DropdownItem divider />
               {/* <DropdownItem><i className='fa fa-shield' /> Lock Account</DropdownItem> */}
               <DropdownItem onClick={e => this.props.onLogout(e)}><i className='fa fa-lock' /> Logout</DropdownItem>
@@ -79,4 +83,15 @@ class DefaultHeader extends Component {
 DefaultHeader.propTypes = propTypes
 DefaultHeader.defaultProps = defaultProps
 
-export default DefaultHeader
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DefaultHeader)
