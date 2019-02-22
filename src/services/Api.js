@@ -78,6 +78,8 @@ const create = (baseURL = AppConfig.apiURL) => {
   const getNotification = (id, query) => api.get(`/notifications/${id}`, { query })
   const deleteNotification = (id) => api.delete(`/notifications/${id}`)
   const updateNotification = (id) => api.put(`/notifications/${id}`)
+  // payment
+  const getPayments = (query) => api.get('/payments', { query })
 
   // ------
   // STEP 3
@@ -113,7 +115,8 @@ const create = (baseURL = AppConfig.apiURL) => {
     getNotification,
     createNotification,
     updateNotification,
-    deleteNotification
+    deleteNotification,
+    getPayments
   }
 }
 

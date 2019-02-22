@@ -8,6 +8,7 @@ const Reports = React.lazy(() => import('./views/Reports'));
 const MostReports = React.lazy(() => import('./views/Reports/MostReports'));
 const Notifications = React.lazy(() => import('./views/Notifications'));
 const NotificationAdd = React.lazy(() => import('./views/Notifications/NotificationAdd'));
+const Payments = React.lazy(() => import('./views/Payments'));
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
@@ -18,7 +19,8 @@ const routes = [
   { path: '/reports', exact: true, name: 'Reports', component: Reports },
   { path: '/reports/most', exact: true, name: 'Most reporters', component: MostReports },
   { path: '/notifications', exact: true, name: 'Notifications', component: Notifications },
-  { path: '/notifications/add', exact: true, name: 'Add Notification', component: NotificationAdd }
+  { path: '/notifications/add', exact: true, name: 'Add Notification', component: NotificationAdd },
+  { path: '/payments', exact: true, name: 'Payments', component: Payments },
 ];
 
 export default routes;

@@ -47,13 +47,13 @@ export default {
       }
     },
     {
-      name: 'Payment',
-      url: '/summary/payment',
+      name: 'Payments',
+      url: '/payments',
       icon: 'icon-credit-card'
     },
     {
       name: 'Conversations',
-      url: '/summary/conversation',
+      url: '/conversations',
       icon: 'icon-bubbles'
     }
   ]

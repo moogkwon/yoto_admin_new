@@ -18,6 +18,7 @@ export const reducers = combineReducers({
   notification: require('./NotificationRedux').reducer,
   report: require('./ReportRedux').reducer,
   summary: require('./SummaryRedux').reducer,
+  payment: require('./PaymentRedux').reducer,
   loadingBar: loadingBarReducer
 })
 

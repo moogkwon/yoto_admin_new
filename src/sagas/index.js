@@ -10,6 +10,7 @@ import { AuthTypes } from '../redux/AuthRedux'
 import { UserTypes } from '../redux/UserRedux'
 import { ReportTypes } from '../redux/ReportRedux'
 import { NotificationTypes } from '../redux/NotificationRedux'
+import { PaymentTypes } from '../redux/PaymentRedux'
 
 /* ------------- Sagas ------------- */
 
@@ -34,6 +35,7 @@ import {
   updateNotification,
   deleteNotification
 } from './NotificationSagas'
+import { getPayments } from './PaymentSagas'
 
 /* ------------- API ------------- */
 
@@ -69,6 +71,8 @@ export default function * root () {
     takeLatest(NotificationTypes.GET_NOTIFICATION, getNotification, api),
     takeLatest(NotificationTypes.CREATE_NOTIFICATION, createNotification, api),
     takeLatest(NotificationTypes.UPDATE_NOTIFICATION, updateNotification, api),
-    takeLatest(NotificationTypes.DELETE_NOTIFICATION, deleteNotification, api)
+    takeLatest(NotificationTypes.DELETE_NOTIFICATION, deleteNotification, api),
+    // payment
+    takeLatest(PaymentTypes.GET_PAYMENTS, getPayments, api)
   ])
 }
