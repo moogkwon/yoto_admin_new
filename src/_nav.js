@@ -52,8 +52,8 @@ export default {
       icon: 'icon-credit-card'
     },
     {
-      name: 'Calling',
-      url: '/summary/calling',
+      name: 'Conversations',
+      url: '/summary/conversation',
       icon: 'icon-bubbles'
     }
   ]

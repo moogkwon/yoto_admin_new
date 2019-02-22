@@ -20,6 +20,7 @@ import navigation from '../../_nav';
 // routes config
 import routes from '../../routes';
 import Loading from '../../views/Loading';
+import SocketIO from '../../views/SocketIO/SocketIO';
 
 const DefaultAside = React.lazy(() => import('./DefaultAside'));
 const DefaultFooter = React.lazy(() => import('./DefaultFooter'));
@@ -37,6 +38,7 @@ class DefaultLayout extends Component {
     return (
       <div className="app">
         {!this.props.auth.user && <Redirect from="*" to="/login" />}
+        <SocketIO />
         <AppHeader fixed>
           <Suspense  fallback={<Loading />}>
             <DefaultHeader onLogout={e=>this.signOut(e)}/>
