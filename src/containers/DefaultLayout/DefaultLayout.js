@@ -1,6 +1,6 @@
-import React, { Component, Suspense } from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
-import { Container } from 'reactstrap';
+import React, { Component, Suspense } from 'react'
+import { Redirect, Route, Switch } from 'react-router-dom'
+import { Container } from 'reactstrap'
 import { connect } from 'react-redux'
 
 import {
@@ -13,49 +13,51 @@ import {
   AppSidebarForm,
   AppSidebarHeader,
   AppSidebarMinimizer,
-  AppSidebarNav,
-} from '@coreui/react';
+  AppSidebarNav
+} from '@coreui/react'
 // sidebar nav config
-import navigation from '../../_nav';
+import navigation from '../../_nav'
 // routes config
-import routes from '../../routes';
-import Loading from '../../views/Loading';
-import SocketIO from '../../views/SocketIO/SocketIO';
+import routes from '../../routes'
+import Loading from '../../views/Loading'
+// import SocketIO from '../../views/SocketIO/SocketIO';
 
 // const DefaultAside = React.lazy(() => import('./DefaultAside'));
+const SocketIO = React.lazy(() => import('../../views/SocketIO/SocketIO'));
 const DefaultFooter = React.lazy(() => import('./DefaultFooter'));
 const DefaultHeader = React.lazy(() => import('./DefaultHeader'));
 
 class DefaultLayout extends Component {
-
-  signOut(e) {
+  signOut (e) {
     e.preventDefault()
     this.props.history.push('/login')
   }
 
-  render() {
+  render () {
     if (this.props.isStarting) return <Loading />
     return (
-      <div className="app">
-        {!this.props.auth.user && <Redirect from="*" to="/login" />}
-        <SocketIO />
+      <div className='app'>
+        {!this.props.auth.user && <Redirect from='*' to='/login' />}
+        <Suspense fallback={null}>
+          <SocketIO />
+        </Suspense>
         <AppHeader fixed>
-          <Suspense  fallback={<Loading />}>
-            <DefaultHeader onLogout={e=>this.signOut(e)}/>
+          <Suspense fallback={<Loading />}>
+            <DefaultHeader onLogout={e => this.signOut(e)} />
           </Suspense>
         </AppHeader>
-        <div className="app-body">
-          <AppSidebar fixed display="lg">
+        <div className='app-body'>
+          <AppSidebar fixed display='lg'>
             <AppSidebarHeader />
             <AppSidebarForm />
             <Suspense>
-            <AppSidebarNav navConfig={navigation} {...this.props} />
+              <AppSidebarNav navConfig={navigation} {...this.props} />
             </Suspense>
             <AppSidebarFooter />
             <AppSidebarMinimizer />
           </AppSidebar>
-          <main className="main">
-            <AppBreadcrumb appRoutes={routes}/>
+          <main className='main'>
+            <AppBreadcrumb appRoutes={routes} />
             <Container fluid>
               <Suspense fallback={<Loading />}>
                 <Switch>
@@ -69,9 +71,9 @@ class DefaultLayout extends Component {
                         render={props => (
                           <route.component {...props} />
                         )} />
-                    ) : (null);
+                    ) : (null)
                   })}
-                  <Redirect from="/" to="/dashboard" />
+                  <Redirect from='/' to='/dashboard' />
                 </Switch>
               </Suspense>
             </Container>
@@ -88,7 +90,7 @@ class DefaultLayout extends Component {
           </Suspense>
         </AppFooter>
       </div>
-    );
+    )
   }
 }
 
