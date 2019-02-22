@@ -32,7 +32,7 @@ export const INITIAL_STATE = Immutable({
     total: 0
   },
   mostQuery: {
-    where: { is_blocked: { $ne: true }, report_count: { $gt: 0 } },
+    where: { is_blocked: { $ne: true }, reported_count: { $gt: 0 } },
     search: '',
     page: 1,
     perPage: 10,

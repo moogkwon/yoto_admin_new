@@ -43,7 +43,7 @@ class MostReport extends Component {
     mostQuery.page = 1
     mostQuery.perPage = 10
     mostQuery.where.is_blocked = { $ne: true }
-    mostQuery.where.report_count = { $gt: 0 }
+    mostQuery.where.reported_count = { $gt: 0 }
     this.setState({ search: '' })
     this.props.getMostReports(mostQuery)
   }
@@ -85,7 +85,11 @@ class MostReport extends Component {
             />
           </Link>
         </td>
-        <td>{user.report_count}</td>
+        <td>{user.reported_count}</td>
+        <td>{user.reported_nude}</td>
+        <td>{user.reported_mean}</td>
+        <td>{user.reported_inappropriate}</td>
+        <td>{user.reported_other}</td>
         <td><Badge color={color}>{status}</Badge></td>
         <td>
           <Button className='btn btn-sm btn-brand btn-warning' onClick={() => this.onClickBlock(user)}><i className='icon-shield icons d-block' /></Button>
@@ -104,7 +108,7 @@ class MostReport extends Component {
             <Card>
               <CardHeader>
                 <div>
-                  <i className='fa fa-align-justify' /> Users
+                  <i className='fa fa-align-justify' /> Most reported users
                 </div>
               </CardHeader>
               <CardBody>
@@ -136,7 +140,11 @@ class MostReport extends Component {
                       <th scope='col'>ID</th>
                       <th scope='col'>Name</th>
                       <th scope='col'>Avatar</th>
-                      <th scope='col'>Report count</th>
+                      <th scope='col'>Reported</th>
+                      <th scope='col'>Nude</th>
+                      <th scope='col'>Mean</th>
+                      <th scope='col'>Inappropriate</th>
+                      <th scope='col'>Other</th>
                       <th scope='col'>Status</th>
                       <th scope='col'>Actions</th>
                     </tr>

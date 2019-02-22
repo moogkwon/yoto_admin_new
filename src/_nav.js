@@ -29,7 +29,7 @@ export default {
       icon: 'icon-shield'
     },
     {
-      name: 'Most reporters',
+      name: 'Most reportees',
       url: '/reports/most',
       icon: 'icon-dislike'
     },
