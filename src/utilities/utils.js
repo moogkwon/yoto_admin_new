@@ -1,4 +1,4 @@
-import moment from 'moment'
+import dayjs from 'dayjs'
 import { toast } from 'react-toastify'
 
 export const removeNonNumber = (string = '') => string.replace(/[^\d]/g, '')
@@ -37,7 +37,7 @@ export function getDataResponse (response) {
 }
 
 export function getAge (dateString) {
-  var birthDay = moment(dateString).format('YYYY/MM/DD')
+  var birthDay = dayjs(dateString).format('YYYY/MM/DD')
   var today = new Date()
   var birthDate = new Date(birthDay)
   var age = today.getFullYear() - birthDate.getFullYear()

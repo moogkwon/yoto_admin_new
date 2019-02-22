@@ -61,9 +61,11 @@
     "video-react": "^0.13.2"
   },
   "devDependencies": {
-    "react-scripts": "2.1.3"
+    "react-scripts": "2.1.3",
+    "webpack-bundle-analyzer": "^3.0.4"
   },
   "scripts": {
+    "analyze": "npm run build -- --stats && webpack-bundle-analyzer build/bundle-stats.json",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
