@@ -4,7 +4,7 @@ import { Container } from 'reactstrap';
 import { connect } from 'react-redux'
 
 import {
-  AppAside,
+  // AppAside,
   AppBreadcrumb,
   AppFooter,
   AppHeader,
@@ -22,7 +22,7 @@ import routes from '../../routes';
 import Loading from '../../views/Loading';
 import SocketIO from '../../views/SocketIO/SocketIO';
 
-const DefaultAside = React.lazy(() => import('./DefaultAside'));
+// const DefaultAside = React.lazy(() => import('./DefaultAside'));
 const DefaultFooter = React.lazy(() => import('./DefaultFooter'));
 const DefaultHeader = React.lazy(() => import('./DefaultHeader'));
 
@@ -76,11 +76,11 @@ class DefaultLayout extends Component {
               </Suspense>
             </Container>
           </main>
-          <AppAside fixed>
+          {/* <AppAside fixed>
             <Suspense fallback={<Loading />}>
               <DefaultAside />
             </Suspense>
-          </AppAside>
+          </AppAside> */}
         </div>
         <AppFooter>
           <Suspense fallback={<Loading />}>
