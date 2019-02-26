@@ -36,9 +36,9 @@ class DefaultHeader extends Component {
           <NavItem className='px-3'>
             <Link to='/users'>Users</Link>
           </NavItem>
-          {/* <NavItem className='px-3'>
-            <NavLink href='#'>Settings</NavLink>
-          </NavItem> */}
+          <NavItem className='px-3'>
+            <NavLink target='_blank' href='/docs'>Api document</NavLink>
+          </NavItem>
         </Nav>
         <Nav className='ml-auto' navbar>
           {/* <NavItem className='d-md-down-none'>
@@ -62,7 +62,7 @@ class DefaultHeader extends Component {
               <DropdownItem><i className='fa fa-tasks' /> Tasks<Badge color='danger'>42</Badge></DropdownItem>
               <DropdownItem><i className='fa fa-comments' /> Comments<Badge color='warning'>42</Badge></DropdownItem> */}
               <DropdownItem header tag='div' className='text-center'><strong>Settings</strong></DropdownItem>
-              <DropdownItem><i className='fa fa-key' /> Password</DropdownItem>
+              <DropdownItem tag={Link} to='/password'><i className='fa fa-key' /> Password</DropdownItem>
               {/* <DropdownItem><i className='fa fa-user' /> Profile</DropdownItem> */}
               {/* <DropdownItem><i className='fa fa-wrench' /> Settings</DropdownItem> */}
               {/* <DropdownItem><i className='fa fa-usd' /> Payments<Badge color='secondary'>42</Badge></DropdownItem> */}

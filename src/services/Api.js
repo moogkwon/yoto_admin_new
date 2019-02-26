@@ -60,6 +60,7 @@ const create = (baseURL = AppConfig.apiURL) => {
   // way at this level.
   // auth
   const login = (data) => api.post('/auth/login', data)
+  const changePassword = (data) => api.post('/auth/password', data)
   const refreshToken = (refreshToken) => api.post('/auth/refresh', { refresh_token: refreshToken })
   // user
   const getUsers = (query) => api.get('/users', { query })
@@ -98,6 +99,7 @@ const create = (baseURL = AppConfig.apiURL) => {
     setToken,
     // auth
     login,
+    changePassword,
     refreshToken,
     // user
     getUsers,

@@ -15,7 +15,7 @@ import { PaymentTypes } from '../redux/PaymentRedux'
 /* ------------- Sagas ------------- */
 
 import { startup } from './StartupSagas'
-import { login } from './AuthSagas'
+import { login, changePassword } from './AuthSagas'
 import {
   getUsers,
   getUser,
@@ -53,6 +53,7 @@ export default function * root () {
     // some sagas receive extra parameters in addition to an action
     // auth
     takeLatest(AuthTypes.LOGIN, login, api),
+    takeLatest(AuthTypes.CHANGE_PASSWORD, changePassword, api),
     // user
     takeLatest(UserTypes.GET_USERS, getUsers, api),
     takeLatest(UserTypes.GET_USER, getUser, api),

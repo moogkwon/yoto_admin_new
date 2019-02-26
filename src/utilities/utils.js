@@ -65,3 +65,9 @@ export function showError (errorMessage, details) {
     autoClose: 3000
   })
 }
+
+export function showMessage (message) {
+  toast.success(message, {
+    autoClose: 3000
+  })
+}

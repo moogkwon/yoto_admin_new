@@ -12,7 +12,7 @@
 
 import { call, put } from 'redux-saga/effects'
 import AuthActions from '../redux/AuthRedux'
-import { getMessageError, showError } from '../utilities/utils'
+import { getMessageError, showError, showMessage } from '../utilities/utils'
 import { showLoading, resetLoading } from 'react-redux-loading-bar'
 import { push } from 'connected-react-router'
 
@@ -31,6 +31,24 @@ export function * login (api, { data }) {
   } else {
     // dispatch failure
     yield put(AuthActions.loginFailure())
+    showError(getMessageError(response))
+  }
+}
+
+export function * changePassword (api, { data }) {
+  yield put(showLoading())
+  // make the call to the api
+  const response = yield call(api.changePassword, data)
+  yield put(resetLoading())
+  // success?
+  if (response.ok) {
+    // dispatch successful changePasswords
+    yield put(AuthActions.changePasswordSuccess())
+    yield put(push('/dashboard'))
+    showMessage('Password changed!!!')
+  } else {
+    // dispatch failure
+    yield put(AuthActions.changePasswordFailure())
     showError(getMessageError(response))
   }
 }
