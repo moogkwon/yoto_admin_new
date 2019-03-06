@@ -19,6 +19,7 @@ import { push } from 'connected-react-router'
 export function * getReports (api) {
   const query = yield select(state => state.report.query.asMutable())
   query.with = ['reportee', 'user']
+  query.sort = '-created_at'
   // make the call to the api
   yield put(showLoading())
   const response = yield call(api.getReports, query)
