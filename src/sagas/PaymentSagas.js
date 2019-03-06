@@ -18,7 +18,7 @@ import { push } from 'connected-react-router'
 
 export function * getPayments (api) {
   const query = yield select(state => state.report.query.asMutable())
-  query.with = ['reportee', 'user']
+  query.with = ['user']
   // make the call to the api
   yield put(showLoading())
   const response = yield call(api.getPayments, query)

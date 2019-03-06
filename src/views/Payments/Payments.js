@@ -72,7 +72,6 @@ class Payments extends Component {
 
   renderRow (payment, index) {
     const userLink = `/users/${payment.user_id}`
-    const status = payment.paymentee && payment.paymentee.is_blocked && <Badge color={'danger'}>Blocked</Badge>
     const no = index + 1 + (this.props.query.page - 1) * this.props.query.perPage
     return (
       <tr key={payment._id}>
@@ -86,12 +85,14 @@ class Payments extends Component {
               src={payment.user && payment.user.avatar_url}
             />
             {' '}
-            {payment.user.name}
+            {payment.user ? payment.user.name : 'Deleted'}
           </Link>
         </td>
-        <td>{payment.reason}</td>
+        <td>{payment.product_id}</td>
+        <td>{payment.transation_id}</td>
         <td>{dayjs(payment.created_at).format('MM/DD/YYYY HH:mm')}</td>
-        <td>{status}</td>
+        <td>N/A</td>
+        <td>N/A</td>
       </tr>
     )
   }
@@ -138,6 +139,7 @@ class Payments extends Component {
                       <th scope='col'>No</th>
                       <th scope='col'>User</th>
                       <th scope='col'>OS</th>
+                      <th scope='col'>Product</th>
                       <th scope='col'>Transaction</th>
                       {/* <th scope='col'>Receipt</th> */}
                       <th scope='col'>Date</th>
