@@ -23,7 +23,11 @@ export function * startup (api, action) {
       yield call(api.setToken, data.token)
     } else {
       yield put(AuthActions.loginFailure())
-      showError(getMessageError(response))
+      if (response.status === 401) {
+        yield put(replace('/login'))
+      } else {
+        showError(getMessageError(response))
+      }
     }
   } else {
     yield put(replace('/login'))
